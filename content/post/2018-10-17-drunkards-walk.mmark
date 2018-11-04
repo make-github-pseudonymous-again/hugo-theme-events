@@ -1,8 +1,8 @@
-+++
+---
 date: 2018-10-17T00:00:00Z
 title: The Drunkard's Walk
 url: /2018/10/17/drunkards-walk/
-+++
+---
 
 A drunkard is zigzagging home. At every steps forward (or backward) he is
 making, he also moves $$1$$ step to the left with probability $$p$$ and $$1$$
