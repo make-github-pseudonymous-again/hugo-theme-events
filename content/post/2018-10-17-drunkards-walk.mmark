@@ -2,6 +2,10 @@
 date: 2018-10-17T00:00:00Z
 title: The Drunkard's Walk
 url: /2018/10/17/drunkards-walk/
+thumbnail:
+  src: https://ipfs.io/ipfs/QmSAXMJTDSRbyNyJZWhXUrdXuKiCxD6p6H9ths64L32dQm
+tags:
+  - recurrences
 ---
 
 A drunkard is zigzagging home. At every steps forward (or backward) he is

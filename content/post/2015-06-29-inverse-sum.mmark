@@ -2,6 +2,8 @@
 date: 2015-06-29T00:00:00Z
 title: Inverse sum equations
 url: /2015/06/29/inverse-sum/
+thumbnail:
+  src: https://ipfs.io/ipfs/QmNnXTqBHeNReAhAE9svPrr5bcXqerc71qb9LJYUhF99h9
 ---
 
 We are given $$k > 0 \in \mathbb{R}$$ and $$a_1, a_2, \ldots, a_n \ge 1 \in \mathbb{N}$$ such that

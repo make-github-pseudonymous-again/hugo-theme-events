@@ -1,35 +1,78 @@
 {{ partial "header.html" . }}
 
-  <nav class="breadcrumb">
-    <a class="breadcrumb-item{{ if eq .Paginator.PageNumber 1 }} active {{ end }}" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
-    {{ if gt .Paginator.PageNumber 1 }}
-    <a class="breadcrumb-item active" href="{{ .Paginator.URL }}">Page {{ .Paginator.PageNumber }}</a>
-    {{ end }}
-  </nav>
-
   <div class="container">
-  {{ range .Paginator.Pages }}
   <div class="row">
-  <div class="col-md-12">
-    <div class="card text-center mb-3">
-      <div class="card-header text-muted">{{ .Date.Format "Mon, Jan 2, 2006" }}</div>
-      {{ with .Param "thumbnail" }}<img class="card-img-top" src="{{ .src }}" alt="{{ .caption }}">{{ end }}
-      <div class="card-block">
-        <h1 class="card-title">{{ .Title | safeHTML }}</h1>
-        <p class="card-text">{{ .Summary }}</p>
-        <a href="{{ .RelPermalink }}" class="btn btn-primary">Read more about {{ .Title | safeHTML }}</a>
-        <div class="pull-right">
-          {{ range .Params.tags }}
-            <span class="badge badge-default"><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> </li>
+    <div class="col m3">
+    </div>
+    <div class="col m6">
+      <nav>
+        <div class="nav-wrapper">
+          <a class="breadcrumb{{ if eq .Paginator.PageNumber 1 }} active {{ end }}" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+          {{ if gt .Paginator.PageNumber 1 }}
+          <a class="breadcrumb active" href="{{ .Paginator.URL }}">Page {{ .Paginator.PageNumber }}</a>
           {{ end }}
+        </div>
+      </nav>
+      {{ range .Paginator.Pages }}
+      <div class="row">
+        <div class="col s12">
+          <div class="card">
+            <div class="card-image">
+              {{ with .Param "thumbnail" }}<img src="{{ .src }}" alt="{{ .caption }}">{{ end }}
+            </div>
+            <div class="card-content">
+              <span class="card-title">{{ .Title | safeHTML }}</span>
+              <span class="card-subtitle grey-text">{{ .Date.Format "Mon, Jan 2, 2006" }}</span>
+              <p>{{ .Summary }}</p>
+            </div>
+            <div class="card-action">
+              <a href="{{ .RelPermalink }}">Read more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+      {{ partial "pagination.html" . }}
+    </div>
+    <div class="col m3">
+      <div class="row">
+      <h6 class="grey-text">Recent</h6>
+      {{ range first 3 (where .Pages "Section" "post") }}
+        <div class="col s12">
+          <div class="card">
+            <div class="card-image">
+              {{ with .Param "thumbnail" }}<img src="{{ .src }}" alt="{{ .caption }}">{{ end }}
+            </div>
+            <div class="card-content">
+              <span class="card-title">{{ .Title | safeHTML }}</span>
+              <span class="card-subtitle grey-text">{{ .Date.Format "Mon, Jan 2, 2006" }}</span>
+            </div>
+            <div class="card-action">
+              <a href="{{ .RelPermalink }}">Read more</a>
+            </div>
+          </div>
+        </div>
+      {{ end }}
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <ul class="collection with-header">
+              <li class="collection-header"><h4>Tags</h4></li>
+              {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+                  {{ with $.Site.GetPage (printf "/tags/%s" $name) }}
+                      <li class="collection-item">
+                        <div>
+                          <a href="{{ .Permalink }}">{{ $name }}</a>
+                          <span class="secondary-content">{{ $taxonomy.Count }}</span>
+                        </div>
+                      </li>
+                  {{ end }}
+              {{ end }}
+          </ul>
         </div>
       </div>
     </div>
   </div>
   </div>
-  {{ end }}
-  </div>
-
-  {{ partial "pagination.html" . }}
 
 {{ partial "footer.html" . }}

@@ -2,6 +2,10 @@
 date: 2017-07-22T00:00:00Z
 title: Infinite Number of Primes
 url: /2017/07/22/infinite-number-of-primes/
+thumbnail:
+  src: https://ipfs.io/ipfs/QmeKDgrff9eE9gZFGBvoVA95QFnP8fNGcsDfMQhun7pApa
+tags:
+  - number-theory
 ---
 
 The erroneous proof I hear most often is: Suppose $$P$$ is a

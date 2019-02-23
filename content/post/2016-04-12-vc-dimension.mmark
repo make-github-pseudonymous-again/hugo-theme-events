@@ -2,7 +2,12 @@
 date: 2016-04-12T00:00:00Z
 title: VC-dimension
 url: /2016/04/12/vc-dimension/
+thumbnail:
+  src: https://ipfs.io/ipfs/QmZpYeMXHBqCC1m8NtDJh82DQS8Q5YDLMPAsW3e4ZJtXTz
 ---
+
+Definitions of VC-dimesion and $$\varepsilon$$-nets.
+<!--more-->
 
 ## Definition 1 (Espilon net)
 Let $$X$$ be a set, let $$\mu$$ be a probability measure on $$X$$, let
@@ -12,7 +17,6 @@ called an $$\varepsilon$$-net for $$(X,\mathcal{F})$$ with respect to
 $$\mu$$ if $$N \cap S \neq \emptyset$$ for all $$S \in \mathcal{F}$$ with
 $$\mu(S) \ge \varepsilon$$.
 
-<!--more-->
 ## Definition 2 (Trace of $$\mathcal{F}$$ on $$Y$$)
 Let $$\mathcal{F}$$ be a set system on $$X$$ and let $$Y \subseteq X$$. We define the
 restriction of $$\mathcal{F}$$ on $$Y$$ (also called the *trace* of
@@ -25,7 +29,7 @@ $$
 
 ## Definition 3 (VC-dimension)
 Let $$\mathcal{F}$$ be a set system on a set $$X$$. Let us say that a subset $$A
-\subseteq X$$ is shttered by $$\mathcal{F}$$ if each of the subsets of $$A$$ can
+\subseteq X$$ is shattered by $$\mathcal{F}$$ if each of the subsets of $$A$$ can
 be obtained as the intersection of some $$S \in \mathcal{F}$$ with $$A$$, i.e.,
 if $$\mathcal{F}|_A = 2^{A}$$. We define the VC-dimension of
 $$\mathcal{F}$$, denoted
