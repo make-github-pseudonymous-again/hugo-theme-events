@@ -1,18 +1,27 @@
 {{ partial "header.html" . }}
 
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper">
+        <a class="brand-logo" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+        <div class="col s6">
+        {{ if gt .Paginator.PageNumber 1 }}
+        <a class="breadcrumb active" href="{{ .Paginator.URL }}">Page {{ .Paginator.PageNumber }}</a>
+        {{ end }}
+        </div>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="#"><i class="material-icons left">calendar_today</i>iCalendar</a></li>
+          <li><a href="#">Source</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
   <div class="container">
   <div class="row">
     <div class="col m3">
     </div>
     <div class="col m6">
-      <nav>
-        <div class="nav-wrapper">
-          <a class="breadcrumb{{ if eq .Paginator.PageNumber 1 }} active {{ end }}" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
-          {{ if gt .Paginator.PageNumber 1 }}
-          <a class="breadcrumb active" href="{{ .Paginator.URL }}">Page {{ .Paginator.PageNumber }}</a>
-          {{ end }}
-        </div>
-      </nav>
+      <h4 class="grey-text">Posts</h4>
       {{ range .Paginator.Pages }}
       <div class="row">
         <div class="col s12">
@@ -36,7 +45,7 @@
     </div>
     <div class="col m3">
       <div class="row">
-      <h6 class="grey-text">Recent</h6>
+      <h4 class="grey-text">Recent</h4>
       {{ range first 3 (where .Pages "Section" "post") }}
         <div class="col s12">
           <div class="card">

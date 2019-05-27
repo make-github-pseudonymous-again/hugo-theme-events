@@ -1,8 +1,12 @@
 {{ partial "header.html" . }}
 
-  <nav class="breadcrumb">
-    <a class="breadcrumb-item" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
-    <a class="breadcrumb-item active" href="{{ .URL }}">Post {{ .UniqueID }}</a>
+  <nav>
+    <div class="nav-wrapper">
+      <div class="col">
+        <a class="breadcrumb" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+        <a class="breadcrumb active" href="{{ .URL }}">Post {{ .UniqueID }}</a>
+      </div>
+    </div>
   </nav>
 
   <div class="container mt-5">
