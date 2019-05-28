@@ -22,20 +22,21 @@
         <article>
           <h1>{{ .Title | safeHTML }}</h1>
           <h4>{{ .Date.Format "Mon, Jan 2, 2006" }}</h4>
-          {{ $taxo := "tags" }} <!-- Use the plural form here -->
-          {{ with .Param $taxo }}
-              {{ if gt (len .) 0 }}
-              <h6>
-              <strong>Tag{{ if gt (len .) 1 }}s{{ end }}:</strong>
-              {{ range $index, $tag := . }}
+            {{ range $taxo, $terms := .Site.Taxonomies }}
+              {{ with $.Param $taxo }}
+                {{ if gt (len .) 0 }}
+                <h6>
+                <strong>{{ $taxo | title }}:</strong>
+                {{ range $index, $term := . }}
                   {{- if gt $index 0 }}, {{ end -}}
-                  {{ with $.Site.GetPage (printf "/%s/%s" $taxo $tag) -}}
-                      <a href="{{ .Permalink }}">{{ $tag }}</a>
+                  {{ with $.Site.GetPage (printf "/%s/%s" $taxo ($term | anchorize)) -}}
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
                   {{- end -}}
-              {{- end -}}
-              </h6>
-              {{- end -}}
-          {{ end }}
+                {{- end -}}
+                </h6>
+                {{- end -}}
+              {{ end }}
+            {{ end }}
           <p>{{ .Content }}</p>
         </article>
       </div>

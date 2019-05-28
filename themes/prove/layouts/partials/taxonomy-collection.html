@@ -1,0 +1,18 @@
+<ul class="collection">
+  {{ range $key, $term := (first 10 .terms.ByCount) }}
+    {{ with $.Site.GetPage (printf "/%s/%s" $.key $term.Name) }}
+      <li class="collection-item">
+	<div>
+	  <a href="{{ .Permalink }}">{{ .Title }}</a>
+	  <span class="secondary-content">{{ $term.Count }}</span>
+	</div>
+      </li>
+    {{ end }}
+  {{ end }}
+  <li class="collection-item">
+    <div>
+      <a class="red-text accent-text-3" href="{{ .Site.BaseURL }}{{ .key }}">Browse all {{ .key }}</a>
+      <span class="secondary-content">...</span>
+    </div>
+  </li>
+</ul>
