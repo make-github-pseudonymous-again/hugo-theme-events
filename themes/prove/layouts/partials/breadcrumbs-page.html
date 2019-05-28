@@ -1,8 +1,11 @@
 <nav class="light-blue accent-2">
   <div class="container nav-wrapper">
-  <a class="breadcrumb" href="{{ .Site.BaseURL }}">Home</a>
-  {{ if gt .Paginator.PageNumber 1 }}
-  <a class="breadcrumb active" href="{{ .Paginator.URL }}">Page {{ .Paginator.PageNumber }}</a>
-  {{ end }}
+	{{ partial "output-formats.html" . }}
+	<div>
+	<a class="breadcrumb" href="{{ .Site.BaseURL }}">Home</a>
+	{{ if gt .Paginator.PageNumber 1 }}
+	<a class="breadcrumb" href="{{ .Paginator.URL }}">Page {{ .Paginator.PageNumber }}</a>
+	{{ end }}
+	</div>
   </div>
 </nav>

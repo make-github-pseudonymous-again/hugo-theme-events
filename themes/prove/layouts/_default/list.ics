@@ -1,0 +1,9 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//elm-conf//speaker calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+{{range .Pages -}}
+{{- partial "event.ics" . -}}
+{{end -}}
+END:VCALENDAR

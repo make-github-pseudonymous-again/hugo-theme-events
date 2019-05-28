@@ -5,5 +5,26 @@ title: Aurélien's Math Notebook
 taxonomies:
   tag: tags
 
+outputs:
+  home:
+    - HTML
+    - RSS
+    - Calendar
+  taxonomy:
+    - HTML
+    - RSS
+    - Calendar
+  section:
+    - HTML
+    - RSS
+    - Calendar
+  taxonomyTerm:
+    - HTML
+  page:
+    - HTML
+    - Calendar
+
 params:
-  editurl: https://github.com/aureooms/math
+  organizer: '"Aurélien Ooms":mailto:info@math.blog.aurelienooms.be'
+  hostname: math.blog.aurelienooms.be
+  editURL: https://github.com/aureooms/math

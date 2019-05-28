@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 	<title>{{ .Title }}</title>
+
+	{{ range .AlternativeOutputFormats -}}
+	<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
+	{{ end -}}
+
 	{{ partial "google-icon-font.html" . }}
 	{{ partial "materialize-css.html" . }}
 	{{ partial "viewport.html" . }}
+
 </head>
 <body>

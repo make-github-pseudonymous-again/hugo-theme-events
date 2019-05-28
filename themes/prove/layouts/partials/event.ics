@@ -1,0 +1,12 @@
+BEGIN:VEVENT
+ORGANIZER;CN={{.Site.Params.organizer}}
+SUMMARY:{{.Title}}{{with .Params.talk}} - {{.}}{{end}}
+UID:{{.Params.date}}@{{.Site.Params.hostname}}
+SEQUENCE:0
+STATUS:CONFIRMED
+DTSTAMP:{{dateFormat "20060102T150405Z" .Date}}
+DTSTART;TZID=America/Chicago:{{dateFormat "20060102T150405" .Params.date}}
+DTEND;TZID=America/Chicago:{{dateFormat "20060102T150405" .Params.date}}
+LOCATION:{{with .Params.location}}{{.}}{{else}}Main Ballroom{{end}}
+URL:{{.Permalink}}
+END:VEVENT
