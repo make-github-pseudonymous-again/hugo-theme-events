@@ -4,8 +4,12 @@
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li><a href="{{ .Site.Params.editURL }}"><i class="material-icons left">edit</i>Edit</a></li>
     </ul>
-    <a class="brand-logo" href="{{ .Site.BaseURL }}"><img height="64" src="{{ .Site.Params.logo.src }}" alt="{{ .Site.Params.logo.alt }}"/></a>
-    <a class="brand-logo center" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+    {{ with .Site.Params.logo }}
+      <a class="brand-logo" href="{{ $.Site.BaseURL }}"><img height="64" src="{{ .src }}" alt="{{ .alt }}"/></a>
+    {{ end }}
+    {{ with .Site.Title }}
+      <a class="brand-logo center" href="{{ $.Site.BaseURL }}">{{ . }}</a>
+    {{ end }}
   </div>
 </nav>
 </div>
