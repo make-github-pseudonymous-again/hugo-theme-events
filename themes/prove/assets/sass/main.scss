@@ -1,0 +1,17 @@
+{{ with .Site.Params.stylesheet }}
+$var1: {{ .searchbar.background | default "#333" }} !default;
+$var2: {{ .breadcrumbs.background | default "#444" }} !default;
+$var3: {{ .pagenumbers.background | default "#444" }} !default;
+{{ end }}
+
+div.navbar-fixed > nav {
+	background: $var1;
+}
+
+nav.breadcrumbs {
+	background: $var2;
+}
+
+ul.pagination > li.active {
+	background: $var3;
+}

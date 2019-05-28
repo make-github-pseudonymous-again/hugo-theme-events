@@ -7,6 +7,8 @@ thumbnail:
   caption: The Drunkard's Pilgrimage
 tags:
   - Recurrences
+authors:
+  - Aurélien Ooms
 ---
 
 A drunkard is zigzagging home. At every steps forward (or backward) he is

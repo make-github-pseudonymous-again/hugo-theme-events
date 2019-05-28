@@ -26,7 +26,16 @@ outputs:
     - Calendar
 
 params:
-  logo: https://cdn.jsdelivr.net/gh/aureooms-ulb/logo/files/ulbgris.svg
+  logo:
+    src: https://cdn.jsdelivr.net/gh/aureooms-ulb/logo/files/ulb-logo-blue-square.svg
+    alt: ULB
   organizer: '"Aurélien Ooms":mailto:info@math.blog.aurelienooms.be'
   hostname: math.blog.aurelienooms.be
   editURL: https://github.com/aureooms/math
+  stylesheet:
+    searchbar:
+      background: '#1d4e9e'
+    breadcrumbs:
+      background: '#a6b8e4'
+    pagenumbers:
+      background: '#a6b8e4'

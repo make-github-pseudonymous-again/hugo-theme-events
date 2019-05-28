@@ -8,6 +8,9 @@
 	<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
 	{{ end -}}
 
+	{{ $style := resources.Get "sass/main.scss" | resources.ExecuteAsTemplate "style.main.scss" . | toCSS | minify | fingerprint }}
+	<link rel="stylesheet" href="{{ $style.Permalink }}">
+
 	{{ partial "google-icon-font.html" . }}
 	{{ partial "materialize-css.html" . }}
 	{{ partial "viewport.html" . }}
