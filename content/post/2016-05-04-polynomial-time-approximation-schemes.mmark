@@ -4,6 +4,8 @@ title: Polynomial-time approximation schemes
 url: /2016/05/04/polynomial-time-approximation-schemes/
 thumbnail:
   src: https://ipfs.io/ipfs/QmZBeHAHCWne2HVihGvCqcVK1meLfRyctk8WVH8qP2szN1
+tags:
+  - approximation-algorithms
 ---
 
 ## PTAS

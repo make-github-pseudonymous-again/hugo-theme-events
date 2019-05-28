@@ -4,6 +4,10 @@ title: VC-dimension
 url: /2016/04/12/vc-dimension/
 thumbnail:
   src: https://ipfs.io/ipfs/QmZpYeMXHBqCC1m8NtDJh82DQS8Q5YDLMPAsW3e4ZJtXTz
+tags:
+  - geometry
+  - vc-dimension
+  - epsilon-nets
 ---
 
 Definitions of VC-dimesion and $$\varepsilon$$-nets.

@@ -1,6 +1,5 @@
 {{ $pag := $.Paginator }}
 {{ if gt $pag.TotalPages 1 }}
-<nav aria-label="Page navigation">
 <ul class="pagination">
 {{ with $pag.First }}
 <li>
@@ -11,17 +10,16 @@
 <a href="{{ if $pag.HasPrev }}{{ $pag.Prev.URL }}{{ end }}" aria-label="Previous"><span aria-hidden="true">Previous</span></a>
 </li>
 {{ range $pag.Pagers }}
-<li class="{{ if eq . $pag }}active{{ else }}waves-effect{{ end }}">
+<li class="{{ if eq . $pag }}active light-blue accent-2{{ else }}waves-effect{{ end }}">
 <a href="{{ .URL }}">{{ .PageNumber }}</a></li>
 {{ end }}
-<li class="page-item{{ if not $pag.HasNext }}disabled{{ else }}waves-effect{{ end }}">
-<a href="{{ if $pag.HasNext }}{{ $pag.Next.URL }}{{ end }}" aria-label="Next"><span aria-hidden="true">Next</span></a>
-</li>
 {{ with $pag.Last }}
-<li class="page-item">
+<li class="right page-item">
 <a href="{{ .URL }}" aria-label="Last"><span aria-hidden="true"><i class="material-icons">chevron_right</i></span></a>
 </li>
 {{ end }}
+<li class="right page-item {{ if not $pag.HasNext }}disabled{{ else }}waves-effect{{ end }}">
+<a href="{{ if $pag.HasNext }}{{ $pag.Next.URL }}{{ end }}" aria-label="Next"><span aria-hidden="true">Next</span></a>
+</li>
 </ul>
-</nav>
 {{ end }}

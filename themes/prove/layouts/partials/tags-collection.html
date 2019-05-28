@@ -1,0 +1,18 @@
+<ul class="collection">
+  {{ range $key, $taxonomy := (first 10 .Site.Taxonomies.tags.ByCount) }}
+    {{ with $.Site.GetPage (printf "/tags/%s" $taxonomy.Name) }}
+      <li class="collection-item">
+	<div>
+	  <a href="{{ .Permalink }}">{{ $taxonomy.Name }}</a>
+	  <span class="secondary-content">{{ $taxonomy.Count }}</span>
+	</div>
+      </li>
+    {{ end }}
+  {{ end }}
+  <li class="collection-item">
+    <div>
+      <a class="red-text accent-text-3" href="{{ .Site.BaseURL }}/tags">Browse All Tags</a>
+      <span class="secondary-content">...</span>
+    </div>
+  </li>
+</ul>

@@ -1,3 +1,9 @@
 baseurl: https://aureooms.github.io/math/
 theme: prove
-title: Aurélien's math blog
+title: Aurélien's Math Notebook
+
+taxonomies:
+  tag: tags
+
+params:
+  editurl: https://github.com/aureooms/math

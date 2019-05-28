@@ -1,24 +1,45 @@
 {{ partial "header.html" . }}
-
-  <nav>
-    <div class="nav-wrapper">
-      <div class="col">
-        <a class="breadcrumb" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
-        <a class="breadcrumb active" href="{{ .URL }}">Post {{ .UniqueID }}</a>
-      </div>
-    </div>
-  </nav>
+{{ partial "navbar.html" . }}
+{{ partial "breadcrumbs-post.html" . }}
 
   <div class="container mt-5">
-  <div class="row">
-  <div class="col-md-12">
-  <article>
-    <h1>{{ .Title | safeHTML }}</h1>
-    <h4>{{ .Date.Format "Mon, Jan 2, 2006" }}</h4>
-    <p>{{ .Content }}</p>
-  </article>
-  </div>
-  </div>
+    <div class="row">
+      <div class="col s0 m3"></div>
+      <div class="col s12 m6">
+        {{ with .Param "thumbnail" }}
+          <div class="card">
+            <div class="card-image">
+              <img src="{{ .src }}" alt="{{ .caption }}">
+              <span class="card-title">{{ .caption }}</span>
+            </div>
+          </div>
+        {{ end }}
+      </div>
+      <div class="col s0 m3"></div>
+    </div>
+    <div class="row">
+      <div class="col m12">
+        <article>
+          <h1>{{ .Title | safeHTML }}</h1>
+          <h4>{{ .Date.Format "Mon, Jan 2, 2006" }}</h4>
+          {{ $taxo := "tags" }} <!-- Use the plural form here -->
+          {{ with .Param $taxo }}
+              {{ if gt (len .) 0 }}
+              <h6>
+              <strong>Tag{{ if gt (len .) 1 }}s{{ end }}:</strong>
+              {{ range $index, $tag := . }}
+                  {{- if gt $index 0 }}, {{ end -}}
+                  {{ with $.Site.GetPage (printf "/%s/%s" $taxo $tag) -}}
+                      <a href="{{ .Permalink }}">{{ $tag }}</a>
+                  {{- end -}}
+              {{- end -}}
+              </h6>
+              {{- end -}}
+          {{ end }}
+          <p>{{ .Content }}</p>
+        </article>
+      </div>
+    </div>
   </div>
 
 {{ partial "footer.html" . }}

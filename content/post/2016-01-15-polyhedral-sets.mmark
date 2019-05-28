@@ -4,6 +4,9 @@ title: Polyhedral sets
 url: /2016/01/15/polyhedral-sets/
 thumbnail:
   src: https://ipfs.io/ipfs/QmSu4S43YGRZr16TrnNtZA3UxEoEpvSpYLEZiBjkiCn7Gg
+tags:
+  - geometry
+  - definitions
 ---
 
 A *polyhedral set* in $$\mathbb{R}^d$$ is the intersection of a finite

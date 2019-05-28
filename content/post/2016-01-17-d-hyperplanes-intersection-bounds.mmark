@@ -4,6 +4,9 @@ title: <span class="math">\(d\)</span> hyperplanes intersection bounds
 url: /2016/01/17/d-hyperplanes-intersection-bounds/
 thumbnail:
   src: https://ipfs.io/ipfs/QmPAdhtD5ojLZP69nVe9EbHgAhon7BDnQbxic9nGSBk5cv
+tags:
+  - geometry
+  - linear-algebra
 ---
 
 We bound the position of the $$0$$-cells of an arrangement of hyperplanes in

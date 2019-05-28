@@ -1,0 +1,29 @@
+{{ partial "header.html" . }}
+{{ partial "navbar.html" . }}
+{{ partial "breadcrumbs-page.html" . }}
+
+  <div class="container">
+  <div class="row">
+    <div class="col m3">
+      <h4 class="grey-text">Tags</h4>
+      <div class="row">
+        <div class="col s12">
+          {{ partial "tags-collection.html" . }}
+        </div>
+      </div>
+    </div>
+    <div class="col m6">
+      <h4 class="grey-text">Posts</h4>
+      {{ partial "posts-page-list.html" . }}
+      {{ partial "pagination.html" . }}
+    </div>
+    <div class="col m3">
+      <h4 class="grey-text">Recent</h4>
+      <div class="row">
+      {{ partial "posts-recent-list.html" . }}
+      </div>
+    </div>
+  </div>
+  </div>
+
+{{ partial "footer.html" . }}
