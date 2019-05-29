@@ -13,6 +13,10 @@
       {{ partial "pagination.html" . }}
     </div>
     <div class="col m3">
+      <h4 class="grey-text">Upcoming</h4>
+      <div class="row">
+      {{ partial "posts-upcoming-list.html" . }}
+      </div>
       <h4 class="grey-text">Recent</h4>
       <div class="row">
       {{ partial "posts-recent-list.html" . }}

@@ -1,6 +1,7 @@
 baseurl: https://math.blog.aurelienooms.be/
 theme: prove
 title: Aurélien's Math Notebook
+buildFuture: true
 
 taxonomies:
   tag: tags
