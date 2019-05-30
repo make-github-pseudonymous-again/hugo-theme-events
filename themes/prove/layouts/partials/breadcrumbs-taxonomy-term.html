@@ -3,9 +3,9 @@
 	{{ partial "output-formats.html" . }}
 	<div>
 	  <a class="breadcrumb" href="{{ .Site.BaseURL }}">Home</a>
-	  <a class="breadcrumb" href="{{ .Site.BaseURL }}/{{ .Data.Plural }}">{{ .Data.Plural | title }}</a>
+	  <a class="breadcrumb" href="{{ .Site.BaseURL }}{{ .Data.Plural }}">{{ .Data.Plural | title }}</a>
 	  {{ if .Data.Term }}
-	  <a class="breadcrumb" href="{{ .Site.BaseURL }}/{{ .Data.Plural }}/{{ .Data.Term }}">{{ .Data.Term }}</a>
+	  <a class="breadcrumb" href="{{ .Site.BaseURL }}{{ .Data.Plural }}/{{ .Data.Term }}">{{ .Data.Term }}</a>
 	  {{ end }}
 	  {{ if gt .Paginator.PageNumber 1 }}
 	  <a class="breadcrumb" href="{{ .Paginator.URL }}">Page {{ .Paginator.PageNumber }}</a>

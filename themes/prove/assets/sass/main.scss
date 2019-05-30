@@ -15,3 +15,8 @@ nav.breadcrumbs {
 ul.pagination > li.active {
 	background: $var3;
 }
+
+ul.collection > li.collection-item > div > a {
+	display: inline-block;
+	max-width: 90%;
+}

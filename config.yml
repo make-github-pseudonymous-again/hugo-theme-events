@@ -40,3 +40,10 @@ params:
       background: '#a6b8e4'
     pagenumbers:
       background: '#a6b8e4'
+  sections:
+    - today
+    - upcoming
+    - past
+  taxonomies:
+    - tags
+    - authors
