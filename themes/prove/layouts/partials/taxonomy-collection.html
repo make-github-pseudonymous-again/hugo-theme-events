@@ -9,13 +9,7 @@
       </li>
     {{ end }}
   {{ end }}
-  <!--<li class="collection-item">-->
-    <!--<div>-->
-      <!--<a class="red-text accent-text-3" href="{{ .Site.BaseURL }}{{ .key }}">Browse all {{ .key }}</a>-->
-      <!--<span class="secondary-content">...</span>-->
-    <!--</div>-->
-  <!--</li>-->
 </ul>
 <div class="row">
-  <a class="orange lighten-3 col s6 offset-s3 waves-effect waves-light btn" href="{{ .Site.BaseURL }}{{ .key }}">Browse {{ len .terms }}</a>
+  <a class="col s6 offset-s3 waves-effect waves-light btn" href="{{ .Site.BaseURL }}{{ .key }}">Browse {{ len .terms }}</a>
 </div>

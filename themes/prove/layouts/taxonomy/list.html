@@ -9,9 +9,9 @@
     </div>
     <div class="col m6">
       {{ if .Data.Term }}
-        <h4 class="grey-text">{{ .Data.Singular | title }} - {{ .Data.Term }}</h4>
+        <h4>{{ .Data.Singular | title }} - {{ .Data.Term }}</h4>
       {{ else }}
-        <h4 class="grey-text">All {{ .Data.Plural | title }}</h4>
+        <h4>All {{ .Data.Plural | title }}</h4>
       {{ end }}
       {{ partial "content-pages-pager.html" . }}
     </div>

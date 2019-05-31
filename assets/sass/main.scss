@@ -1,0 +1,45 @@
+$primary-color: #1d4e9e;
+$secondary-color: #a6b8e4;
+
+@import "assets/materialize-src/sass/components/color-variables";
+@import "assets/materialize-src/sass/components/color-classes";
+
+$button-color: color("orange", "lighten-3");
+$button-background-focus: lighten($button-color, 4%);
+$button-raised-background: $button-color;
+$button-floating-background: $button-color;
+
+@import "assets/materialize-src/sass/materialize.scss";
+
+h4, span.card-subtitle {
+	color: color("grey", "base");
+}
+
+nav.breadcrumbs {
+	background: $secondary-color;
+}
+
+ul.pagination > li.active {
+	background: $secondary-color;
+}
+
+ul.collection > li.collection-item > div > a {
+	display: inline-block;
+	max-width: 90%;
+}
+
+div.navbar-fixed > nav .input-field {
+  position: absolute;
+}
+
+#search {
+
+  //position: absolute;
+  transition: width 0.5s ease, color 0.5s ease, background-color 0.5s ease;
+
+  &:focus:not([readonly]) {
+    width: 100%;
+  }
+
+}
+

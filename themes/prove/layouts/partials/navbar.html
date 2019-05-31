@@ -1,8 +1,10 @@
 <div class="navbar-fixed">
 <nav>
   <div class="container nav-wrapper">
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="{{ .Site.Params.editURL }}"><i class="material-icons left">edit</i>Edit</a></li>
+    <ul class="right hide-on-med-and-down">
+      {{ with .Site.Params.editURL }}
+	<li><a href="{{ . }}"><i class="material-icons left">edit</i>Edit</a></li>
+      {{ end }}
     </ul>
     {{ with .Site.Params.logo }}
       <a class="brand-logo" href="{{ $.Site.BaseURL }}"><img height="64" src="{{ .src }}" alt="{{ .alt }}"/></a>
