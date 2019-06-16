@@ -7,7 +7,9 @@
 	  </div>
 	  <div class="card-content">
 		<span class="card-title">{{ .Title | safeHTML }}</span>
-		<span class="card-subtitle">{{ .Date.Format "Mon, Jan 2, 2006" }}</span>
+		<span class="card-subtitle">
+		  {{ partial "status-and-date.html" (dict "status" .Params.status "date" .Date) }}
+		</span>
 		<p>{{ .Summary }}</p>
 	  </div>
 	  <div class="card-action">

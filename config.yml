@@ -3,6 +3,11 @@ theme: prove
 title: Aurélien's Math Notebook
 buildFuture: true
 
+permalinks:
+  today: /:year/:month/:day/:title
+  past: /:year/:month/:day/:title
+  upcoming: /:year/:month/:day/:title
+
 taxonomies:
   tag: tags
   author: authors
@@ -30,7 +35,7 @@ params:
   logo:
     src: https://cdn.jsdelivr.net/gh/aureooms-ulb/logo/files/ulb-logo-blue-square.svg
     alt: ULB
-  organizer: '"Aurélien Ooms":mailto:info@math.blog.aurelienooms.be'
+  organizer: 'CN="Aurélien Ooms":mailto:info@math.blog.aurelienooms.be'
   hostname: math.blog.aurelienooms.be
   editURL: https://github.com/aureooms/math
   nav:
@@ -41,3 +46,13 @@ params:
     taxonomies:
       - tags
       - authors
+  calendar:
+    tzid: Europe/Brussels
+    status:
+      - CONFIRMED # Indicates event is definite.
+      - TENTATIVE # Indicates event is tentative.
+      - CANCELLED # Indicates event was cancelled.
+    classification:
+      - PUBLIC
+      - PRIVATE
+      - CONFIDENTIAL

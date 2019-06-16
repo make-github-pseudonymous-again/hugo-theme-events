@@ -21,7 +21,7 @@
       <div class="col m12">
         <article>
           <h1>{{ .Title | safeHTML }}</h1>
-          <h4>{{ .Date.Format "Mon, Jan 2, 2006" }}</h4>
+          <h4>{{ partial "status-and-date.html" (dict "status" .Params.status "date" .Date) }}</h4>
             {{ range $taxo, $terms := .Site.Taxonomies }}
               {{ with $.Param $taxo }}
                 {{ if gt (len .) 0 }}

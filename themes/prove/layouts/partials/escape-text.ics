@@ -1,0 +1,7 @@
+{{/*
+   See https://www.ietf.org/rfc/rfc5545.txt @3.3.11
+   ESCAPED-CHAR = ("\\" / "\;" / "\," / "\N" / "\n")
+	  ; \\ encodes \, \N or \n encodes newline
+	  ; \; encodes ;, \, encodes ,
+*/}}
+{{- replace ( replace ( replace ( replace .  "\\" "\\\\") ";" "\\;") "," "\\,") "\n" "\\n" -}}

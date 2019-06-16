@@ -1,0 +1,6 @@
+{{- $TZ := dateFormat "MST" . -}}
+{{- if (eq $TZ "UTC") -}}
+:{{dateFormat "20060102T150405Z" .}}
+{{- else -}}
+;TZID={{dateFormat "MST" .}}:{{dateFormat "20060102T150405" .}}
+{{- end -}}
