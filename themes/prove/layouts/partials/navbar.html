@@ -7,10 +7,11 @@
       {{ end }}
     </ul>
     {{ with .Site.Params.logo }}
-      <a class="brand-logo" href="{{ $.Site.BaseURL }}"><img height="64" src="{{ .src }}" alt="{{ .alt }}"/></a>
+      <a class="brand-logo hide-on-small-only" href="{{ $.Site.BaseURL }}"><img height="64" src="{{ .src }}" alt="{{ .alt }}"/></a>
+      <a class="brand-logo hide-on-med-and-up" href="{{ $.Site.BaseURL }}"><img height="56" src="{{ .src }}" alt="{{ .alt }}"/></a>
     {{ end }}
     {{ with .Site.Title }}
-      <a class="brand-logo center" href="{{ $.Site.BaseURL }}">{{ . }}</a>
+    <a class="brand-logo center{{with $.Site.Params.logo}} hide-on-med-and-down{{end}}" href="{{ $.Site.BaseURL }}">{{ . }}</a>
     {{ end }}
   </div>
 </nav>

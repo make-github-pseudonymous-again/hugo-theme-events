@@ -3,11 +3,12 @@
 <ul class="pagination">
 {{ with $pag.First }}
 <li>
-<a href="{{ .URL }}" aria-label="First"><span aria-hidden="true"><i class="material-icons">chevron_left</i></span></a>
+<a href="{{ .URL }}" aria-label="First"><span aria-hidden="true"><i class="material-icons">first_page</i></span></a>
 </li>
 {{ end }}
 <li class="{{ if not $pag.HasPrev }}disabled{{ else }}waves-effect{{ end }}">
-<a href="{{ if $pag.HasPrev }}{{ $pag.Prev.URL }}{{ end }}" aria-label="Previous"><span aria-hidden="true">Previous</span></a>
+<a class="hide-on-small-only" href="{{ if $pag.HasPrev }}{{ $pag.Prev.URL }}{{ end }}" aria-label="Previous"><span aria-hidden="true">Previous</span></a>
+<a class="hide-on-med-and-up" href="{{ if $pag.HasPrev }}{{ $pag.Prev.URL }}{{ end }}" aria-label="Previous"><span aria-hidden="true"><i class="material-icons">chevron_left</i></span></a>
 </li>
 {{ range $pag.Pagers }}
 <li class="{{ if eq . $pag }}active{{ else }}waves-effect{{ end }}">
@@ -15,11 +16,12 @@
 {{ end }}
 {{ with $pag.Last }}
 <li class="right page-item">
-<a href="{{ .URL }}" aria-label="Last"><span aria-hidden="true"><i class="material-icons">chevron_right</i></span></a>
+<a href="{{ .URL }}" aria-label="Last"><span aria-hidden="true"><i class="material-icons">last_page</i></span></a>
 </li>
 {{ end }}
 <li class="right page-item {{ if not $pag.HasNext }}disabled{{ else }}waves-effect{{ end }}">
-<a href="{{ if $pag.HasNext }}{{ $pag.Next.URL }}{{ end }}" aria-label="Next"><span aria-hidden="true">Next</span></a>
+<a class="hide-on-small-only" href="{{ if $pag.HasNext }}{{ $pag.Next.URL }}{{ end }}" aria-label="Next"><span aria-hidden="true">Next</span></a>
+<a class="hide-on-med-and-up" href="{{ if $pag.HasNext }}{{ $pag.Next.URL }}{{ end }}" aria-label="Next"><span aria-hidden="true"><i class="material-icons">chevron_right</i></span></a>
 </li>
 </ul>
 {{ end }}

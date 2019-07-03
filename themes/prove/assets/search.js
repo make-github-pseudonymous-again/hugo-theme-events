@@ -39,7 +39,8 @@ function matchToHTML ( match ) {
 	return `<li class="collection-item avatar" onClick="window.location.href='${href}'">
 	  ${avatar}
 	  <span class="title">${title}</span>
-	  <p>${subtitle}${text ? '<br>'+text : ''}</p>
+	  <p>${subtitle}</p>
+	  <div class="hide-on-small-only">${text}</div>
 	  <span class="secondary-content"><i class="material-icons">${icon}</i></span>
 	</li>`;
 }

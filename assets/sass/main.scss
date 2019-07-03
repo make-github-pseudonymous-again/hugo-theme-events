@@ -17,6 +17,15 @@ h4, span.card-subtitle {
 
 nav.breadcrumbs {
 	background: $secondary-color;
+
+	& .sidenav-trigger, & .dropdown-trigger {
+	  margin: 0;
+	}
+
+}
+
+ul.sidenav li.collection-header > h4 {
+	padding: 0 32px;
 }
 
 ul.pagination > li.active {
@@ -30,6 +39,22 @@ ul.collection > li.collection-item > div > a {
 
 div.navbar-fixed > nav .input-field {
   position: absolute;
+}
+
+nav > div.container > a.brand-logo.center {
+  height: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  padding: 0 100px;
+}
+
+nav.breadcrumbs > div.container > div {
+  height: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #search {
@@ -80,8 +105,11 @@ nav.searchbar {
       background-color: $button-color;
     }
 
-    &.avatar > p {
-      margin-right: 30px;
+    &.avatar {
+      & > span.title, & > p, & > div {
+	display: block;
+	margin-right: 30px;
+      }
     }
 
     & a {
