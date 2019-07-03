@@ -1,0 +1,43 @@
+{{- if (isset .Params "date") -}}
+{{- if (and (isset .Params "status") (eq (in .Site.Params.calendar.status .Params.status) false)) -}}
+{{ errorf "Failed to handle page %q. `.Params.status` must be unset or one of %v. Got %q." .Path .Site.Params.calendar.status .Params.status }}
+{{- end -}}
+BEGIN:VEVENT
+DTSTAMP{{partial "datetime-utc.ics" (.PublishDate | default .Date)}}
+UID:{{.Permalink | anchorize}}@{{.Site.Params.hostname}}
+SEQUENCE:0
+CLASS:PUBLIC
+SUMMARY:{{.Title}}
+{{- with .Summary}}
+DESCRIPTION:{{ partial "escape-text.ics" (plainify .) }}
+{{- end }}
+{{- with .Params.categories}}
+CATEGORIES:{{ delimit . "," }}
+{{- end }}
+STATUS:{{ .Params.status | default (index .Site.Params.calendar.status 0) }}
+{{- with .Date }}
+DTSTART{{partial "datetime-local.ics" .}}
+{{ end -}}
+{{- with .Params.end -}}
+DTEND{{partial "datetime-local.ics" .}}
+{{ else }}
+{{- with .Params.duration -}}
+DURATION:{{.}}
+{{ end -}}
+{{ end -}}
+{{- with .PublishDate -}}
+CREATED{{partial "datetime-utc.ics" .}}
+{{ end -}}
+{{- with .Params.lastmod -}}
+LAST-MODIFIED{{partial "datetime-utc.ics" .}}
+{{ end -}}
+{{- with .Params.location -}}
+LOCATION:{{.}}
+{{ end -}}
+{{- with .Params.geolocation -}}
+GEO:{{.latitude}};{{.longitude}}
+{{ end -}}
+ORGANIZER;{{.Params.organizer | default .Site.Params.organizer}}
+URL:{{.Permalink}}
+END:VEVENT
+{{- end }}

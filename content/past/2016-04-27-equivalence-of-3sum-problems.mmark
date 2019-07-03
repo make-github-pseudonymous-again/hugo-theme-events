@@ -1,0 +1,21 @@
+---
+date: 2016-04-27T00:00:00Z
+title: Equivalence of 3SUM problems
+url: /2016/04/27/equivalence-of-3sum-problems/
+thumbnail:
+  src: https://ipfs.io/ipfs/QmeHrVkaqogCPYKw3Gu29PWgkYCBWc4YEio16iNVjzcUzg
+tags:
+  - Algorithms
+---
+
+Are different versions of the 3SUM problem equivalent?
+
+<!--more-->
+
+## Reducing 3SUMx1 to 3SUMx3
+
+???
+
+## Reducing 3SUMx3 to 3SUMx1
+
+$$ (a, 3), (b, 4), (c, -7) $$

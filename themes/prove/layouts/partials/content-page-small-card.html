@@ -1,0 +1,16 @@
+<div class="col s12">
+      <div class="card">
+	<div class="card-image">
+	      {{ with .Param "thumbnail" }}<img src="{{ .src }}" alt="{{ .caption }}">{{ end }}
+	</div>
+	<div class="card-content">
+	      <span class="card-title">{{ .Title | safeHTML }}</span>
+	      <span class="card-subtitle">
+		{{ partial "status-and-date.html" (dict "status" .Params.status "date" .Date) }}
+	      </span>
+	</div>
+	<div class="card-action">
+	      <a href="{{ .RelPermalink }}">Read more</a>
+	</div>
+      </div>
+</div>

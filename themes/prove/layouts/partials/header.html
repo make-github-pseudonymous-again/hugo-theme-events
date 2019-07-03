@@ -1,8 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 	<title>{{ .Title }}</title>
-	{{ partial "bootstrap.html" . }}
-	{{ partial "math.html" . }}
+
+	{{ range .AlternativeOutputFormats -}}
+	<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
+	{{ end -}}
+
+	{{ $style := resources.Get "sass/main.scss" | toCSS | minify | fingerprint }}
+	<link rel="stylesheet" href="{{ $style.Permalink }}">
+	<!--{{ partial "materialize-css.html" . }}-->
+
+	{{ partial "material-icons.html" . }}
+	{{ partial "viewport.html" . }}
+
 </head>
 <body>

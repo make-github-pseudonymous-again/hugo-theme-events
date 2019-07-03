@@ -1,0 +1,21 @@
+{{ partial "header.html" . }}
+{{ partial "navbar.html" . }}
+{{ partial "breadcrumbs-page.html" . }}
+{{ partial "searchbar.html" . }}
+
+  <div class="container">
+  <div class="row">
+    <div class="col m3">
+      {{ partial "taxonomies.html" . }}
+    </div>
+    <div class="col m6">
+      <h4>{{ .Section | title }}</h4>
+      {{ partial "content-pages-pager.html" . }}
+    </div>
+    <div class="col m3">
+      {{ partial "all-sections-previews.html" . }}
+    </div>
+  </div>
+  </div>
+
+{{ partial "footer.html" . }}

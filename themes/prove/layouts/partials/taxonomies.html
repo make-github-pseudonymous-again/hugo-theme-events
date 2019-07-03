@@ -1,0 +1,11 @@
+{{ range $key := .Site.Params.nav.taxonomies }}
+{{ with $.Site.GetPage (printf "/%s" $key) }}
+{{ $terms := .Data.Terms }}
+<h4>{{ $key | title }}</h4>
+<div class="row">
+  <div class="col s12">
+    {{ partial "taxonomy-collection.html" (dict "Site" $.Site "key" $key "terms" $terms ) }}
+  </div>
+</div>
+{{ end }}
+{{ end }}

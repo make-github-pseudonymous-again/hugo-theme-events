@@ -1,6 +1,6 @@
 {{ partial "header.html" . }}
 {{ partial "navbar.html" . }}
-{{ partial "breadcrumbs-page.html" . }}
+{{ partial "breadcrumbs-taxonomy-term.html" . }}
 {{ partial "searchbar.html" . }}
 
   <div class="container">
@@ -9,7 +9,11 @@
       {{ partial "taxonomies.html" . }}
     </div>
     <div class="col m6">
-      <h4>All</h4>
+      {{ if .Data.Term }}
+        <h4>{{ .Data.Singular | title }} - {{ .Data.Term }}</h4>
+      {{ else }}
+        <h4>All {{ .Data.Plural | title }}</h4>
+      {{ end }}
       {{ partial "content-pages-pager.html" . }}
     </div>
     <div class="col m3">

@@ -1,0 +1,15 @@
+{{ range .Site.Params.nav.sections }}
+  {{ $all := where $.Site.RegularPages "Section" ( . | anchorize ) }}
+  {{ $n := len $all}}
+  {{ $ordered := $all }}
+  {{ $preview := first 3 $ordered }}
+  {{ if gt $n 0 }}
+    <h4>{{ . | title }}</h4>
+    <div class="row">
+      {{ range $preview }}
+	{{ partial "content-page-small-card.html" . }}
+      {{ end }}
+      <a class="col s6 offset-s3 waves-effect waves-light btn" href="{{ $.Site.BaseURL }}{{ . | anchorize }}">Browse {{$n}}</a>
+    </div>
+  {{ end }}
+{{ end }}

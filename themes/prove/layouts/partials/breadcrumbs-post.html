@@ -1,0 +1,10 @@
+<nav class="breadcrumbs">
+  <div class="container nav-wrapper">
+    {{ partial "output-formats.html" . }}
+    <div>
+      <a class="breadcrumb" href="{{ .Site.BaseURL }}">Home</a>
+      <a class="breadcrumb" href="{{ .Site.BaseURL }}{{ .Section }}">{{ .Section | title }}</a>
+      <a class="breadcrumb" href="{{ .Permalink }}">Item {{ .File.UniqueID }}</a>
+    </div>
+  </div>
+</nav>

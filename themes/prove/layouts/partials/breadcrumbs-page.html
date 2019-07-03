@@ -1,0 +1,14 @@
+<nav class="breadcrumbs">
+  <div class="container nav-wrapper">
+	{{ partial "output-formats.html" . }}
+	<div>
+	<a class="breadcrumb" href="{{ .Site.BaseURL }}">Home</a>
+	{{ if .Section }}
+	<a class="breadcrumb" href="{{ .Site.BaseURL }}{{ .Section }}">{{ .Section | title }}</a>
+	{{ end }}
+	{{ if gt .Paginator.PageNumber 1 }}
+	<a class="breadcrumb" href="{{ .Paginator.URL }}">Page {{ .Paginator.PageNumber }}</a>
+	{{ end }}
+	</div>
+  </div>
+</nav>

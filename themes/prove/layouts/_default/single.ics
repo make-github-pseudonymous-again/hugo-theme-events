@@ -1,0 +1,7 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:{{ .Permalink | anchorize }}
+CALSCALE:{{ .Site.Params.calendar.calscale | default "GREGORIAN" }}
+METHOD:PUBLISH
+{{partial "event.ics" . -}}
+END:VCALENDAR

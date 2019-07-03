@@ -1,20 +1,47 @@
 {{ partial "header.html" . }}
-
-  <nav class="breadcrumb">
-    <a class="breadcrumb-item" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
-    <a class="breadcrumb-item active" href="{{ .URL }}">Post {{ .UniqueID }}</a>
-  </nav>
+{{ partial "navbar.html" . }}
+{{ partial "breadcrumbs-post.html" . }}
+{{ partial "searchbar.html" . }}
 
   <div class="container mt-5">
-  <div class="row">
-  <div class="col-md-12">
-  <article>
-    <h1>{{ .Title | safeHTML }}</h1>
-    <h4>{{ .Date.Format "Mon, Jan 2, 2006" }}</h4>
-    <p>{{ .Content }}</p>
-  </article>
-  </div>
-  </div>
+    <div class="row">
+      <div class="col s0 m3"></div>
+      <div class="col s12 m6">
+        {{ with .Param "thumbnail" }}
+          <div class="card">
+            <div class="card-image">
+              <img src="{{ .src }}" alt="{{ .caption }}">
+              <span class="card-title">{{ .caption }}</span>
+            </div>
+          </div>
+        {{ end }}
+      </div>
+      <div class="col s0 m3"></div>
+    </div>
+    <div class="row">
+      <div class="col m12">
+        <article>
+          <h1>{{ .Title | safeHTML }}</h1>
+          <h4>{{ partial "status-and-date.html" (dict "status" .Params.status "date" .Date) }}</h4>
+            {{ range $taxo, $terms := .Site.Taxonomies }}
+              {{ with $.Param $taxo }}
+                {{ if gt (len .) 0 }}
+                <h6>
+                <strong>{{ $taxo | title }}:</strong>
+                {{ range $index, $term := . }}
+                  {{- if gt $index 0 }}, {{ end -}}
+                  {{ with $.Site.GetPage (printf "/%s/%s" $taxo ($term | anchorize)) -}}
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
+                  {{- end -}}
+                {{- end -}}
+                </h6>
+                {{- end -}}
+              {{ end }}
+            {{ end }}
+          <p>{{ .Content }}</p>
+        </article>
+      </div>
+    </div>
   </div>
 
 {{ partial "footer.html" . }}

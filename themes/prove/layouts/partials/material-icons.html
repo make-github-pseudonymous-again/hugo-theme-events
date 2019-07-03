@@ -1,0 +1,5 @@
+<!--Import Google Icon Font-->
+<!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+
+{{ $style := resources.Get "vendor/material-icons.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $style.Permalink }}">
