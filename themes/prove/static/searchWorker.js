@@ -5,19 +5,23 @@ var debug = function () {
   if (lunrConfig.debug) console.debug.apply(console, arguments);
 } ;
 
+var log = function () {
+  console.log.apply(console, arguments);
+} ;
+
 debug("lunrConfig", lunrConfig);
 debug("lunrPlugins", lunrPlugins);
 
 self.index = null;
 self.pendingQuery = '';
 
-function measure ( what , callback ) {
+function measure ( logger , what , callback ) {
 
     debug( what + " started.");
 	var t0 = performance.now();
 	var output = callback();
 	var t1 = performance.now();
-	console.log( what + " took " + (t1 - t0) + " milliseconds.");
+	logger( what + " took " + (t1 - t0) + " milliseconds.");
 	return output;
 
 }
@@ -28,7 +32,7 @@ function executeQuery ( index , queryString ) {
     try {
 
         //const results = self.index.search(queryString);
-        const results = measure("Search", function(){return index.search(queryString);});
+        const results = measure(debug, "Search", function(){return index.search(queryString);});
         const matches = results
           .slice(0,lunrConfig.limit)
           .map(result => (
@@ -38,12 +42,12 @@ function executeQuery ( index , queryString ) {
             }
         ));
 
-        postMessage(matches);
+      postMessage({matches});
 
     }
-    catch ( err ) {
-        console.error(err);
-        postMessage([]);
+    catch ( error ) {
+        console.error(error);
+        postMessage({error});
     }
 }
 
@@ -68,7 +72,9 @@ fetch('/index.json')
 	.then( response => response.json() )
 	.then( object => object.documents )
 	.then( documents => {
-		measure("Initializing search worker", function () {initWorker(documents);});
+		postMessage({state: 'loading'});
+		measure(log, "Initializing search worker", function () {initWorker(documents);});
+		postMessage({state: 'ready'});
 	});
 
 onmessage = function (event) {

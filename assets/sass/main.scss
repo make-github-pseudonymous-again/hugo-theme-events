@@ -53,7 +53,6 @@ div.container {
 
 nav.searchbar {
   background-color: $button-color;
-  //transition: height 0.5s ease, color 0.5s ease;
   body:not(.searched-at-least-once) & {
     height: 0;
     overflow: hidden;
@@ -61,26 +60,45 @@ nav.searchbar {
 }
 
 #search-results {
+  visibility: visible;
   opacity: 1;
   z-index: 1;
   position: absolute;
   width: 100%;
   transition: visibility 0, opacity 0.5s;
   body:not(.searching) & {
-    visibility:hidden;
+    visibility: hidden;
     opacity: 0;
   }
 
-  & > div.collection > a.collection-item {
+  & > .collection > .collection-item {
     color: #222;
+    width: 100%;
+
+    &[onClick]:hover {
+      cursor: pointer;
+      background-color: $button-color;
+    }
 
     &.avatar > p {
       margin-right: 30px;
     }
+
+    & a {
+      padding: 0;
+      display: inline;
+      color: $link-color;
+
+      &:hover {
+	background: none;
+      }
+    }
+
   }
 }
 
 #search-button {
+  visibility: visible;
   opacity: 1;
   position: fixed;
   bottom: 2em;

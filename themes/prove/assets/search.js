@@ -26,7 +26,7 @@ function getKind ( url ) {
 
 function matchToHTML ( match ) {
 	const href = match.document.link;
-	const title = `${match.document.link} - ${match.document.title} (${match.result.score.toFixed(3)})`;
+	const title = `${decodeURI(match.document.link)} - ${match.document.title} (${match.result.score.toFixed(3)})`;
 	const subtitle = match.document.date ? statusAndDate(match.document.date, match.document.status) : '';
 	const text = match.document.summary;
 	const kind = getKind(match.document.link);
@@ -34,14 +34,14 @@ function matchToHTML ( match ) {
 	let avatar = `<i class="material-icons circle">${icon}</i>` ;
 	const thumbnail = match.document.thumbnail;
 	if ( thumbnail ) {
-		avatar = `<img src="${thumbnail.src}" alt="${thumbnail.caption}" class="circle">` ;
+		avatar = `<img src="${thumbnail.src}" alt="${thumbnail.caption || ''}" class="circle">` ;
 	}
-	return `<a class="collection-item avatar" href="${href}">
+	return `<li class="collection-item avatar" onClick="window.location.href='${href}'">
 	  ${avatar}
 	  <span class="title">${title}</span>
 	  <p>${subtitle}${text ? '<br>'+text : ''}</p>
 	  <span class="secondary-content"><i class="material-icons">${icon}</i></span>
-	</a>`;
+	</li>`;
 }
 
 function measure ( what , callback ) {
@@ -66,8 +66,8 @@ function initSearch ( ) {
 		const queryString = event.target.value;
 		searchWorker.postMessage(queryString);
 		searchTimeout = setTimeout(function () {
-		    resultHTML = `<a class="collection-item">Searching is taking longer than expected ...</a>`;
-		    results.innerHTML = '<div class="collection">' + resultHTML + '</div>' ;
+		    resultHTML = `<li class="collection-item">Searching is taking longer than expected ...</li>`;
+		    results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
 		}, 1000);
 	};
 
@@ -79,22 +79,39 @@ function initSearch ( ) {
 		document.body.classList.remove('searching');
 	} ;
 
+	const gobble = function (event) {
+	    event.stopPropagation();
+	} ;
+
 	search.addEventListener('input', onInput);
 	search.addEventListener('focusin', onFocusIn);
-	search.addEventListener('focusout', onFocusOut);
+	search.addEventListener('click', gobble);
+	document.body.addEventListener('click', onFocusOut);
 
 	searchWorker.onmessage = function(e) {
 		clearTimeout(searchTimeout);
 		searchTimeout = undefined;
-		var matches = e.data;
-		if (matches.length === 0) {
-			resultHTML = `<a class="collection-item">No search results found</a>`;
+		var data = e.data;
+		var state = data.state;
+		var error = data.error;
+		var matches = data.matches;
+		if ( state === 'loading') {
+			resultHTML = `<li class="collection-item">Worker is generating an index</li>`;
+		}
+		else if ( state === 'ready') {
+			resultHTML = `<li class="collection-item">Type to start searching</li>`;
+		}
+		else if (error) {
+			resultHTML = `<li class="collection-item">lunr.js error: ${error.message}</li>`;
+		}
+		else if (matches.length === 0) {
+			resultHTML = `<li class="collection-item">Nothing matches the query</li>`;
 		}
 		else {
 			resultHTML = matches.map(matchToHTML).join('');
 		}
 
-		results.innerHTML = '<div class="collection">' + resultHTML + '</div>' ;
+		results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
 
 		if (renderMathInElement) renderMathInElement(results);
 
@@ -102,12 +119,16 @@ function initSearch ( ) {
 
 	// Configure search button to show and focus search input
 	const searchButton = document.getElementById('search-button');
-	const onClick = function () {
+	const onClick = function (event) {
+		event.stopPropagation();
 		document.body.classList.add('searched-at-least-once');
 		window.scrollTo(0, 0);
 		search.focus();
 	} ;
 	searchButton.addEventListener('click', onClick);
+
+	resultHTML = `<li class="collection-item">Connecting to worker...</li>`;
+	results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
 
 	// Notify page that search is ready
 	document.body.classList.add('searching-initialized');
