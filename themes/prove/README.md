@@ -1,5 +1,9 @@
 # The Material Theme
 
+## About minification of generated files
+
+Use `hugo --minify ...`.
+
 ## About the `duration` attribute
 
 Excerpt from https://www.ietf.org/rfc/rfc5545.txt:
