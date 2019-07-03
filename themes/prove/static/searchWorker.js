@@ -1,5 +1,5 @@
 importScripts('/vendor/lunr.min.js');
-importScripts('/lunrConfig.js');
+importScripts('/searchConfig.js');
 
 var debug = function () {
   if (lunrConfig.debug) console.debug.apply(console, arguments);
