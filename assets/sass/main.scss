@@ -70,6 +70,14 @@ nav.searchbar {
     visibility:hidden;
     opacity: 0;
   }
+
+  & > div.collection > a.collection-item {
+    color: #222;
+
+    &.avatar > p {
+      margin-right: 30px;
+    }
+  }
 }
 
 #search-button {

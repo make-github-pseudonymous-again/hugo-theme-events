@@ -4,12 +4,17 @@
 	{{- range $index, $page := . -}}
 		{{- if ne $index 0 -}},{{- end }}
 		{
-		  "id": {{$index}},
-		  "link": {{$page.RelPermalink | jsonify }},
-		  "title": {{$page.Title | jsonify }}
+		  "id": {{ $index }},
+		  "link": {{ $page.RelPermalink | jsonify }},
+		  "title": {{ $page.Title | jsonify }},
+		  "date": {{ $page.Date.Format "Mon, Jan 2, 2006 MST" | jsonify }}
 		  {{- with $page.Param "status" -}}
 		  ,
 		  "status": {{ . | jsonify }}
+		  {{ end }}
+		  {{- with $page.Param "thumbnail" -}}
+		  ,
+		  "thumbnail": {{ . | jsonify }}
 		  {{ end }}
 		  {{- with $page.Content -}}
 		  ,
