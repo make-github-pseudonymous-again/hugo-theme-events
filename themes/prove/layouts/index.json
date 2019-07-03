@@ -18,7 +18,7 @@
 		  {{ end }}
 		  {{- with $page.Content -}}
 		  ,
-		  "summary": {{ $page.Summary | plainify | jsonify }},
+		  "summary": {{ $page.Summary | jsonify }},
 		  "content": {{ . | plainify | jsonify }}
 		  {{- end -}}
 		  {{- range $key := .Site.Params.nav.taxonomies -}}
