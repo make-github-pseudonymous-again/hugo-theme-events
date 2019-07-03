@@ -26,7 +26,7 @@ function getKind ( url ) {
 
 function matchToHTML ( match ) {
 	const href = match.document.link;
-	const title = `${match.document.link} - ${match.document.title} (${match.result.score})`;
+	const title = `${match.document.link} - ${match.document.title} (${match.result.score.toFixed(3)})`;
 	const subtitle = match.document.date ? statusAndDate(match.document.date, match.document.status) : '';
 	const text = match.document.summary;
 	const kind = getKind(match.document.link);
