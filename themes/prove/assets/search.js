@@ -5,6 +5,8 @@ var ICONS = {
     'tag' : 'label' ,
 } ;
 
+var searchTimeout = undefined;
+
 function statusAndDate ( date , status ) {
     if (status === "CANCELLED") return `<s>${date}</s><span class="red-text"> (CANCELLED)</span>` ;
     else if (status === "TENTATIVE") return `${date}<span class="orange-text"> (TENTATIVE DATE AND TIME)</span>`;
@@ -59,8 +61,14 @@ function initSearch ( ) {
 	const search = document.getElementById('search');
 	const results = document.getElementById('search-results');
 	const onInput = function (event) {
+		clearTimeout(searchTimeout);
+		searchTimeout = undefined;
 		const queryString = event.target.value;
 		searchWorker.postMessage(queryString);
+		searchTimeout = setTimeout(function () {
+		    resultHTML = `<a class="collection-item">Searching is taking longer than expected ...</a>`;
+		    results.innerHTML = '<div class="collection">' + resultHTML + '</div>' ;
+		}, 1000);
 	};
 
 	const onFocusIn = function () {
@@ -76,6 +84,8 @@ function initSearch ( ) {
 	search.addEventListener('focusout', onFocusOut);
 
 	searchWorker.onmessage = function(e) {
+		clearTimeout(searchTimeout);
+		searchTimeout = undefined;
 		var matches = e.data;
 		if (matches.length === 0) {
 			resultHTML = `<a class="collection-item">No search results found</a>`;
