@@ -1,0 +1,29 @@
+{
+	"documents": [
+	{{- with .Site.AllPages -}}
+	{{- range $index, $page := . -}}
+		{{- if ne $index 0 -}},{{- end }}
+		{
+		  "id": {{$index}},
+		  "link": {{$page.RelPermalink | jsonify }},
+		  "title": {{$page.Title | jsonify }}
+		  {{- with $page.Param "status" -}}
+		  ,
+		  "status": {{ . | jsonify }}
+		  {{ end }}
+		  {{- with $page.Content -}}
+		  ,
+		  "summary": {{ $page.Summary | plainify | jsonify }},
+		  "content": {{ . | plainify | jsonify }}
+		  {{- end -}}
+		  {{- range $key := .Site.Params.nav.taxonomies -}}
+		  {{- with $page.Param $key -}}
+		  ,
+		  {{ $key | jsonify }}: {{ . | jsonify -}}
+		  {{- end -}}
+		  {{ end }}
+		}
+	{{- end -}}
+	{{ end }}
+	]
+}

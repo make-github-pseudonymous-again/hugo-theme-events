@@ -1,5 +1,5 @@
 <!-- Compiled and minified JavaScript -->
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>-->
 
-{{ $code := resources.Get "materialize-src/js/bin/materialize.js" | minify | fingerprint }}
+{{ $code := resources.Get "vendor/materialize-src/js/bin/materialize.js" | minify | fingerprint }}
 <script src="{{ $code.Permalink }}"></script>

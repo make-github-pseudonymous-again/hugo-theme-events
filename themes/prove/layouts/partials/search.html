@@ -1,0 +1,2 @@
+{{ $searchjs := resources.Get "search.js" | minify | fingerprint }}
+<script src="{{ $searchjs.Permalink }}"></script>
