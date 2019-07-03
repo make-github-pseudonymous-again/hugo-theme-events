@@ -4,6 +4,11 @@
 
 Use `hugo --minify ...`.
 
+## Configuring lunr.js
+
+Edit `/static/searchConfig.js` according
+to https://lunrjs.com/guides/customising.html
+
 ## About the `duration` attribute
 
 Excerpt from https://www.ietf.org/rfc/rfc5545.txt:
