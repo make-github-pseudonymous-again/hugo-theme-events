@@ -11,6 +11,17 @@ $button-floating-background: $button-color;
 
 @import "assets/vendor/materialize-src/sass/materialize.scss";
 
+h4,
+.card div.card-content,
+.card span.card-subtitle span, .card span.card-title, .card p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+a.btn {
+  text-overflow: ellipsis;
+}
+
 h4, span.card-subtitle {
 	color: color("grey", "base");
 }
@@ -32,9 +43,17 @@ ul.pagination > li.active {
 	background: $secondary-color;
 }
 
+.pagination li a.no-padding {
+    padding: 0;
+}
+
 ul.collection > li.collection-item > div > a {
-	display: inline-block;
-	max-width: 90%;
+  display: inline-block;
+  max-width: calc(100% - 20px);
+  padding-right: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 div.navbar-fixed > nav .input-field {
