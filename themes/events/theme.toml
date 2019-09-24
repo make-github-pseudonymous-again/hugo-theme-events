@@ -1,0 +1,12 @@
+name = "events"
+license = "AGPL-3.0"
+licenselink = "https://github.com/aureooms/hugo-theme-events/blob/master/LICENSE.md"
+description = "A theme for calendars and event lists."
+homepage = "https://github.com/aureooms/hugo-theme-events"
+tags = []
+features = []
+min_version = "0.19"
+
+[author]
+  name = "Aurélien Ooms"
+  homepage = "https://aureooms.github.io"

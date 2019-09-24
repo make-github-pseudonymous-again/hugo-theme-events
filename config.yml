@@ -1,5 +1,5 @@
 baseurl: https://math.blog.aurelienooms.be/
-theme: prove
+theme: events
 title: Aurélien's Math Notebook
 buildFuture: true
 
