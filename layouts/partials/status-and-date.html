@@ -1,7 +1,9 @@
 {{ if (eq .status "CANCELLED") }}
-      <s>{{ .date.Format "Mon, Jan 2, 2006 MST" }}</s><span class="red-text"> (CANCELLED)</span>
+      <s>{{ dateFormat "Mon, Jan 2, 2006 15:04 MST" .date.Local }}</s><span class="red-text"> (CANCELLED)</span>
 {{ else if (eq .status "TENTATIVE") }}
-      {{ .date.Format "Mon, Jan 2, 2006 MST" }}<span class="orange-text"> (TENTATIVE DATE AND TIME)</span>
+      {{ dateFormat "Mon, Jan 2, 2006 15:04 MST" .date.Local }}<span class="orange-text"> (TENTATIVE DATE AND TIME)</span>
+{{ else if (eq .status "CONFIRMED") }}
+      {{ dateFormat "Mon, Jan 2, 2006 15:04 MST" .date.Local }}<span class="green-text"> (CONFIRMED)</span>
 {{ else }}
-      {{ .date.Format "Mon, Jan 2, 2006 MST" }}
+      {{ dateFormat "Mon, Jan 2, 2006 15:04 MST" .date.Local }}
 {{ end }}
