@@ -28,12 +28,7 @@
                 {{ if gt (len .) 0 }}
                 <h6>
                 <strong>{{ $taxo | title }}:</strong>
-                {{ range $index, $term := . }}
-                  {{- if gt $index 0 }}, {{ end -}}
-                  {{ with $.Site.GetPage (printf "/%s/%s" $taxo ($term | anchorize)) -}}
-                    <a href="{{ .Permalink }}">{{ .Title }}</a>
-                  {{- end -}}
-                {{- end -}}
+                {{ partial "taxonomy-list.html" (dict "Site" $.Site "taxo" $taxo "terms" .) }}
                 </h6>
                 {{- end -}}
               {{ end }}

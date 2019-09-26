@@ -1,0 +1,6 @@
+{{ range $index, $term := .terms }}
+  {{- if gt $index 0 }}, {{ end -}}
+  {{ with $.Site.GetPage (printf "/%s/%s" $.taxo ($term | anchorize)) -}}
+    <a href="{{ .Permalink }}">{{ .Title }}</a>
+  {{- end -}}
+{{- end -}}
