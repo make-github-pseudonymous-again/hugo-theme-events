@@ -61,7 +61,7 @@ function measure ( what , callback ) {
 
 function initSearch ( ) {
 
-	var searchWorker = new Worker('/searchWorker.js');
+	const searchWorker = new Worker(`${SiteBaseURL}/searchWorker.js`);
 
 	const search = document.getElementById('search');
 	const results = document.getElementById('search-results');

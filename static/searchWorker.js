@@ -1,5 +1,5 @@
-importScripts('/vendor/lunr.min.js');
-importScripts('/searchConfig.js');
+importScripts('./vendor/lunr.min.js');
+importScripts('./searchConfig.js');
 
 var debug = function () {
 	if (lunrConfig.debug) console.debug.apply(console, arguments);
@@ -72,7 +72,7 @@ function initWorker ( documents ) {
 
 }
 
-fetch('/index.json')
+fetch('./index.json')
 	.then( response => response.json() )
 	.then( object => object.documents )
 	.then( documents => {
