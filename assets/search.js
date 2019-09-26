@@ -29,9 +29,10 @@ function getKind ( url ) {
 
 function matchToHTML ( match ) {
 	const href = match.document.link;
-	const title = `${decodeURI(match.document.link)} - ${match.document.title} (${match.result.score.toFixed(3)})`;
+	const title = `${match.document.title} (${match.result.score.toFixed(3)})`;
+	const url = `${decodeURI(match.document.link)}`;
 	const subtitle = match.document.date ? statusAndDate(match.document.date, match.document.status) : '';
-	const text = match.document.summary;
+	const text = match.document.summary || '';
 	const kind = getKind(match.document.link);
 	const icon = ICONS[kind];
 	let avatar = `<i class="material-icons circle">${icon}</i>` ;
@@ -42,7 +43,7 @@ function matchToHTML ( match ) {
 	return `<li class="collection-item avatar" onClick="window.location.href='${href}'">
 	  ${avatar}
 	  <span class="title">${title}</span>
-	  <p>${subtitle}</p>
+	  <p>${subtitle}<br>${url}</p>
 	  <div class="hide-on-small-only">${text}</div>
 	  <span class="secondary-content"><i class="material-icons">${icon}</i></span>
 	</li>`;
@@ -70,7 +71,7 @@ function initSearch ( ) {
 		const queryString = event.target.value;
 		searchWorker.postMessage(queryString);
 		searchTimeout = setTimeout(function () {
-		    resultHTML = `<li class="collection-item">Searching is taking longer than expected ...</li>`;
+		    resultHTML = `<li class="collection-item">Search is taking longer than expected ...</li>`;
 		    results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
 		}, 1000);
 	};
