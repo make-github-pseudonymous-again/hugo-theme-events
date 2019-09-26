@@ -1,9 +1,12 @@
+{{- $pctx := . -}}
+{{- if .IsHome -}}{{ $pctx = .Site }}{{- end -}}
+{{- $pages := $pctx.RegularPages -}}
 BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:{{ .Permalink | anchorize }}
 CALSCALE:{{ .Site.Params.calendar.calscale | default "GREGORIAN" }}
 METHOD:PUBLISH
-{{range .Pages -}}
+{{range $pages -}}
 {{- partial "event.ics" . -}}
 {{end -}}
 END:VCALENDAR
