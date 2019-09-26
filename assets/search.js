@@ -2,6 +2,7 @@ var ICONS = {
     'collection': 'class' ,
     'item' : 'notes' ,
     'author': 'face' ,
+    'speaker': 'face' ,
     'tag' : 'label' ,
 } ;
 
@@ -19,6 +20,7 @@ function getKind ( url ) {
     if (parts.length === 1) return 'collection' ;
 
     if (parts[0] === 'authors') return 'author' ;
+    if (parts[0] === 'speakers') return 'speaker' ;
     if (parts[0] === 'tags') return 'tag' ;
 
     return 'item' ;
