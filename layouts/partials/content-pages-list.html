@@ -10,6 +10,19 @@
 		<span class="card-subtitle">
 		  {{ partial "status-and-date.html" (dict "status" .Params.status "date" .Date) }}
 		</span>
+		<p>
+		{{ $params:= .Params }}
+		{{ range $taxo := $.Site.Params.cards.taxonomies }}
+		  {{ with (index $params $taxo) }}
+		    {{ if gt (len .) 0 }}
+		    <h6>
+		    <span>{{ $taxo | title }}:</span>
+		    {{ partial "taxonomy-list.html" (dict "Site" $.Site "taxo" $taxo "terms" .) }}
+		    </h6>
+		    {{- end -}}
+		  {{ end }}
+		{{ end }}
+		</p>
 		<p>{{ .Summary }}</p>
 	  </div>
 	  <div class="card-action">
