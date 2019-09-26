@@ -11,6 +11,7 @@ var searchTimeout = undefined;
 function statusAndDate ( date , status ) {
     if (status === "CANCELLED") return `<s>${date}</s><span class="red-text"> (CANCELLED)</span>` ;
     else if (status === "TENTATIVE") return `${date}<span class="orange-text"> (TENTATIVE DATE AND TIME)</span>`;
+    else if (status === "CONFIRMED") return `${date}<span class="green-text"> (CONFIRMED)</span>`;
     return date;
 }
 
