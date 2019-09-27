@@ -9,7 +9,7 @@
       {{ if .Data.Term }}
         <h4>{{ .Data.Singular | title }} - {{ .Data.Term }}</h4>
       {{ else }}
-        <h4>All {{ .Data.Plural | title }}</h4>
+        <h4>All {{ .Data.Plural }}</h4>
       {{ end }}
       {{ partial "content-pages-pager.html" . }}
     </div>

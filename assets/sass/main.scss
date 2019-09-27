@@ -76,6 +76,11 @@ nav.breadcrumbs > div.container > div {
   white-space: nowrap;
 }
 
+nav > div.container > ul.right {
+  position: relative;
+  z-index: 1;
+}
+
 #search {
 
   //position: absolute;
