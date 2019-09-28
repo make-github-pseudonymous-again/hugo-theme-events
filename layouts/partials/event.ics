@@ -43,7 +43,7 @@ URL:{{.Permalink}}
 ATTENDEE;ROLE=CHAIR:{{ . }}
 {{ end -}}
 {{- range .Params.speakers -}}
-ATTENDEE;ROLE=REQ-PARTICIPANT;CN="{{ partial "escape-text.ics" . }}"
+ATTENDEE;ROLE=REQ-PARTICIPANT;CN="{{ partial "escape-text.ics" . }}":
 {{ end -}}
 END:VEVENT
 {{- end }}
