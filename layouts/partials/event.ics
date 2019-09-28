@@ -32,12 +32,18 @@ CREATED{{partial "datetime-utc.ics" .}}
 LAST-MODIFIED{{partial "datetime-utc.ics" .}}
 {{ end -}}
 {{- with .Params.location -}}
-LOCATION:{{.}}
+LOCATION:{{ partial "escape-text.ics" . }}
 {{ end -}}
 {{- with .Params.geolocation -}}
 GEO:{{.latitude}};{{.longitude}}
 {{ end -}}
 ORGANIZER;{{.Params.organizer | default .Site.Params.organizer}}
 URL:{{.Permalink}}
+{{ with .Params.chair -}}
+ATTENDEE;ROLE=CHAIR:{{ . }}
+{{ end -}}
+{{- range .Params.speakers -}}
+ATTENDEE;ROLE=REQ-PARTICIPANT;CN="{{ partial "escape-text.ics" . }}"
+{{ end -}}
 END:VEVENT
 {{- end }}
