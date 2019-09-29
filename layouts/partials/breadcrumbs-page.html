@@ -1,6 +1,7 @@
 <nav class="breadcrumbs">
   <div class="container nav-wrapper">
 	{{ partial "output-formats-selector.html" . }}
+	{{ partial "mobile-sidenav.html" . }}
 	<div>
 	<a class="breadcrumb" href="{{ .Site.BaseURL }}">Home</a>
 	{{ if .Section }}

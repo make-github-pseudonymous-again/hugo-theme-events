@@ -35,8 +35,10 @@ nav.breadcrumbs {
 
 }
 
-ul.sidenav li.collection-header > h4 {
-	padding: 0 32px;
+ul.sidenav > li > a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 ul.pagination > li.active {

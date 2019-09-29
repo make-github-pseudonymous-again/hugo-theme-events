@@ -1,0 +1,50 @@
+{{/*
+<ul id="dropdown1" class="dropdown-content">
+{{ partial "output-formats.html" . }}
+</ul>
+*/}}
+<ul id="sidenav1" class="sidenav">
+<li><a class="subheader">Output Formats</a></li>
+{{ partial "output-formats.html" . }}
+{{ range .Site.Params.nav.sections }}
+  {{ $all := where $.Site.RegularPages "Section" ( . | anchorize ) }}
+  {{ $n := len $all}}
+  {{ $ordered := $all }}
+  {{ $preview := first 3 $ordered }}
+  {{ if gt $n 0 }}
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">{{ . | title }}</a></li>
+      {{ range $preview }}
+      <li>
+	<a href="{{ .RelPermalink }}">{{ .Title | safeHTML }}</a>
+      </li>
+      {{ end }}
+    <li>
+      <a href="{{ $.Site.BaseURL }}{{ . | anchorize }}">Browse all ({{$n}})</a>
+    </li>
+  {{ end }}
+{{ end }}
+{{ range $key := .Site.Params.nav.taxonomies }}
+<li><div class="divider"></div></li>
+{{ with $.Site.GetPage (printf "/%s" $key) }}
+{{ $terms := .Data.Terms }}
+<li><a class="subheader">{{ $key | title }}</a></li>
+{{ range $index, $term := (first 10 $terms.ByCount) }}
+  {{ with $.Site.GetPage (printf "/%s/%s" $key $term.Name) }}
+    <li>
+	<a href="{{ .Permalink }}">{{ .Title }} ({{ $term.Count }})</a>
+    </li>
+  {{ end }}
+{{ end }}
+<li>
+  <a href="{{ $.Site.BaseURL }}{{ $key }}">Browse all ({{ len $terms }})</a>
+</li>
+{{ end }}
+{{ end }}
+</ul>
+<ul class="right hide-on-large-only">
+{{/*
+<li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><i class="material-icons">more_vert</i></a></li>
+*/}}
+<li><a class="sidenav-trigger" href="#!" data-target="sidenav1"><i class="material-icons">menu</i></a></li>
+</ul>
