@@ -1,0 +1,21 @@
+{{ if gt (len .Site.Params.nav.sections) 0 }}
+<h4>Events</h4>
+<div class="row">
+  <div class="col s12">
+    <ul class="collection">
+      {{ range $key := .Site.Params.nav.sections }}
+	{{ $all := where $.Site.RegularPages "Section" ( . | anchorize ) }}
+	{{ $n := len $all }}
+	{{ with $.Site.GetPage (printf "/%s" $key) }}
+	  <li class="collection-item">
+	    <div>
+	      <a href="{{ .Permalink }}">{{ .Title }}</a>
+	      <span class="secondary-content">{{$n}}</span>
+	    </div>
+	  </li>
+	{{ end }}
+      {{ end }}
+    </ul>
+  </div>
+</div>
+{{ end }}

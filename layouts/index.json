@@ -5,9 +5,11 @@
 		{{- if ne $index 0 -}},{{- end }}
 		{
 		  "id": {{ $index }},
+		  "kind": {{ $page.Kind | jsonify }},
 		  "link": {{ $page.RelPermalink | jsonify }},
 		  "title": {{ $page.Title | jsonify }},
-		  "date": {{ $page.Date.Format "Mon, Jan 2, 2006 MST" | jsonify }}
+		  "date": {{ $page.Date.Local.Format "Mon, Jan 2, 2006 MST" | jsonify }},
+		  "utc": {{ $page.Date.UTC.Format "2006-01-02T15:04:05.999Z" | jsonify }}
 		  {{- with $page.Param "status" -}}
 		  ,
 		  "status": {{ . | jsonify }}

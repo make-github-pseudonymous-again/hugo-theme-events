@@ -9,10 +9,11 @@
       <h4>404</h4>
       <p>Page not found.</p>
     </div>
-    <div class="col m3 push-m3 s12">
-      {{ partial "all-sections-previews.html" . }}
+    <div id="timeline" class="col m3 push-m3 s12">
+      <!--{{ partial "all-sections-previews.html" . }}-->
     </div>
     <div class="col m3 pull-m9 s12">
+      {{ partial "sections.html" . }}
       {{ partial "taxonomies.html" . }}
     </div>
   </div>
