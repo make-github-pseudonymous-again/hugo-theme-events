@@ -42,7 +42,7 @@ function refreshTimeline ( events ) {
 
   if ( future.length > 0 ) {
     if ( future.length > 1 ) {
-      collections.push(collection("Future", future.slice(0,3)));
+      collections.push(collection("Upcoming", future.slice(0,3)));
     }
     collections.push(collection("Past", past.slice(0,3)));
   }
