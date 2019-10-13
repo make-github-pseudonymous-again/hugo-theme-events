@@ -1,6 +1,6 @@
 {{ with .OutputFormats.Get "RSS" }}
-<li><a href="{{ .RelPermalink }}"><i class="material-icons left">rss_feed</i>RSS</a></li>
+<li><a href="{{ .RelPermalink }}" class="output-format"><i class="material-icons left">rss_feed</i>RSS</a></li>
 {{ end }}
 {{ with .OutputFormats.Get "Calendar" }}
-<li><a href="{{ .RelPermalink }}"><i class="material-icons left">calendar_today</i>iCalendar</a></li>
+<li><a href="{{ .RelPermalink }}" class="output-format"><i class="material-icons left">calendar_today</i>iCalendar</a></li>
 {{ end }}
