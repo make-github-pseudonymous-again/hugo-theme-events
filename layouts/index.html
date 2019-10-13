@@ -1,22 +1,8 @@
-{{ partial "header.html" . }}
-{{ partial "navbar.html" . }}
-{{ partial "breadcrumbs-page.html" . }}
-{{ partial "searchbar.html" . }}
+{{ define "breadcrumbs"}}
+  {{ partial "breadcrumbs-page.html" . }}
+{{ end }}
 
-  <div class="container">
-  <div class="row">
-    <div class="col m6 push-m3 s12">
-      <h4>All</h4>
-      {{ partial "content-pages-pager.html" . }}
-    </div>
-    <div id="timeline" class="col m3 push-m3 s12">
-      <!--{{ partial "all-sections-previews.html" . }}-->
-    </div>
-    <div class="col m3 pull-m9 s12">
-      {{ partial "sections.html" . }}
-      {{ partial "taxonomies.html" . }}
-    </div>
-  </div>
-  </div>
-
-{{ partial "footer.html" . }}
+{{ define "main"}}
+  <h4>All</h4>
+  {{ partial "content-pages-pager.html" . }}
+{{ end }}

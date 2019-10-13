@@ -1,0 +1,23 @@
+{{ partial "header.html" . }}
+{{ partial "navbar.html" . }}
+{{ block "breadcrumbs" . }}
+{{ end }}
+{{ partial "searchbar.html" . }}
+
+  <div class="container">
+  <div class="row">
+    <div class="col m6 push-m3 s12">
+      {{ block "main" . }}
+      {{ end }}
+    </div>
+    <div id="timeline" class="col m3 push-m3 s12">
+      <!--{{ partial "all-sections-previews.html" . }}-->
+    </div>
+    <div class="col m3 pull-m9 s12">
+      {{ partial "sections.html" . }}
+      {{ partial "taxonomies.html" . }}
+    </div>
+  </div>
+  </div>
+
+{{ partial "footer.html" . }}
