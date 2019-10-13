@@ -11,6 +11,10 @@ $button-floating-background: $button-color;
 
 @import "assets/vendor/materialize-src/sass/materialize.scss";
 
+body {
+  padding-bottom: 100px;
+}
+
 h4,
 .card div.card-content,
 .card span.card-subtitle span, .card span.card-title, .card p {
@@ -152,6 +156,7 @@ nav.searchbar {
 }
 
 #search-button {
+  z-index: 10;
   visibility: visible;
   opacity: 1;
   position: fixed;
