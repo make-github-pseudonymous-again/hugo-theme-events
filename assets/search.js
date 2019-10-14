@@ -15,8 +15,11 @@ function statusAndDate ( date , status ) {
     return date;
 }
 
+const BEGIN_PATH = SiteBaseURL.split('/').slice(3).join('/').length + 1;
+
 function getKind ( url ) {
-    const parts = url.slice(1,-1).split('/');
+
+    const parts = url.slice(BEGIN_PATH,-1).split('/');
 
     if (parts.length === 1) return 'collection' ;
 
