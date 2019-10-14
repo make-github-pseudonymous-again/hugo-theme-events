@@ -43,6 +43,10 @@ nav.breadcrumbs {
 
 }
 
+ul.sidenav {
+  height: 100%;
+}
+
 ul.sidenav li > a {
   overflow: hidden;
   text-overflow: ellipsis;
