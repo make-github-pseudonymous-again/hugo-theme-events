@@ -81,6 +81,9 @@ function initTimeline ( documents ) {
   refreshTimeline(events);
   window.setInterval(refreshTimeline, TIMEOUT_ONE_MINUTE, events);
 
+  // Notify page that search is ready
+  document.body.classList.add('timeline-initialized');
+
 }
 
 function refreshTimeline ( events ) {

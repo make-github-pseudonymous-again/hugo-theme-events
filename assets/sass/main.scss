@@ -177,3 +177,15 @@ nav.searchbar {
   }
 }
 
+// timeline
+
+#timeline, #timeline-sidenav {
+
+  opacity: 1;
+  transition: opacity 0.5s;
+
+  body:not(.timeline-initialized) & {
+    opacity: 0;
+  }
+
+}
