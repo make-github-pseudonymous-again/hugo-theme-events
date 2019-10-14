@@ -3,21 +3,7 @@
 {{ partial "breadcrumbs-post.html" . }}
 {{ partial "searchbar.html" . }}
 
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col s0 m3"></div>
-      <div class="col s12 m6">
-        {{ with .Param "thumbnail" }}
-          <div class="card">
-            <div class="card-image">
-              <img src="{{ .src }}" alt="{{ .caption }}">
-              <span class="card-title">{{ .caption }}</span>
-            </div>
-          </div>
-        {{ end }}
-      </div>
-      <div class="col s0 m3"></div>
-    </div>
+  <div class="container">
     <div class="row">
       <div class="col m12">
         <article>
@@ -37,6 +23,20 @@
         </article>
       </div>
     </div>
+    {{ with .Param "thumbnail" }}
+    <div class="row">
+      <div class="col s0 m2 l3"></div>
+      <div class="col s12 m8 l6">
+          <div class="card">
+            <div class="card-image">
+              <img src="{{ .src }}" alt="{{ .caption }}">
+              <span class="card-title">{{ .caption }}</span>
+            </div>
+          </div>
+      </div>
+      <div class="col s0 m2 l3"></div>
+    </div>
+    {{ end }}
   </div>
 
 {{ partial "footer.html" . }}
