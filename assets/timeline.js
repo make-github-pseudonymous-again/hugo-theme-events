@@ -125,7 +125,9 @@ function refreshContentTimeline ( past,future,today,current ) {
 
   const root = document.getElementById("timeline");
 
-  if (root) root.innerHTML = html ;
+  if (root && root.innerHTML !== html) {
+    root.innerHTML = html ;
+  }
 
 }
 
@@ -147,7 +149,9 @@ function refreshSidenavTimeline ( past,future,today,current ) {
 
   const root = document.getElementById("sidenav-timeline");
 
-  if (root) root.innerHTML = html ;
+  if (root && root.innerHTML !== html) {
+    root.innerHTML = html ;
+  }
 
 }
 
