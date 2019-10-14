@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var outputFormats = document.querySelectorAll('.output-format');
   for ( const element of outputFormats ) {
-    element.addEventListener("click", copyHRefToClipboardUI);
+    element.addEventListener("click", copyHRefToClipboardUI(element));
   }
 
 });
@@ -39,7 +39,7 @@ const copyStringToClipboardUI = str => {
   M.toast({html: `Copied '${str}' to clipboard.`})
 };
 
-const copyHRefToClipboardUI = event => {
+const copyHRefToClipboardUI = element => event => {
   event.preventDefault();
-  copyStringToClipboardUI(event.target.href);
+  copyStringToClipboardUI(element.href);
 };
