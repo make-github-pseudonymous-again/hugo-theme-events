@@ -7,6 +7,9 @@ fetch(`${SiteBaseURL}/index.json`)
 const chronologically = ( a , b ) => a.begin - b.begin ;
 const antichronologically = ( a , b ) => b.begin - a.begin ;
 
+const DURATION_ONE_HOUR = 'PT1H' ;
+const TIMEOUT_ONE_MINUTE = 60 * 1000 ;
+
 function parseDuration ( str ) {
 
   // https://tools.ietf.org/html/rfc5545#section-3.3.6
@@ -68,7 +71,7 @@ function initTimeline ( documents ) {
       event.end = new Date(event.utc_end);
     }
     else {
-      if ( !event.duration ) event.duration = 'PT1H' ;
+      if ( !event.duration ) event.duration = DURATION_ONE_HOUR ;
       event.end = new Date(event.begin.getTime() + parseDuration(event.duration));
     }
   }
@@ -76,7 +79,7 @@ function initTimeline ( documents ) {
   events.sort(chronologically);
 
   refreshTimeline(events);
-  window.setInterval(refreshTimeline, 60 * 1000, events);
+  window.setInterval(refreshTimeline, TIMEOUT_ONE_MINUTE, events);
 
 }
 
