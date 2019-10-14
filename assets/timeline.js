@@ -9,6 +9,8 @@ const antichronologically = ( a , b ) => b.begin - a.begin ;
 
 function parseDuration ( str ) {
 
+  // https://tools.ietf.org/html/rfc5545#section-3.3.6
+
   const multiplier = str[0] === '-' ? -1 : 1 ;
   let index = 0;
   let total = 0;
