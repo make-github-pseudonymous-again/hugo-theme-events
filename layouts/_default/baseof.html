@@ -6,14 +6,14 @@
 
   <div class="container">
   <div class="row">
-    <div class="col m6 push-m3 s12">
+    <div class="col l6 push-l3 m8 push-m2 s12">
       {{ block "main" . }}
       {{ end }}
     </div>
-    <div id="timeline" class="col m3 push-m3 s12">
+    <div id="timeline" class="col l3 push-l3 hide-on-med-and-down">
       <!--{{ partial "all-sections-previews.html" . }}-->
     </div>
-    <div class="col m3 pull-m9 s12">
+    <div class="col l3 pull-l9 hide-on-med-and-down">
       {{ partial "sections.html" . }}
       {{ partial "taxonomies.html" . }}
     </div>
