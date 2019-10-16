@@ -100,10 +100,23 @@ function refreshTimeline ( events ) {
   const happeningToday = event => (event.begin < beginningOfTomorrow && beginningOfToday <= event.end);
   const happeningNow = event => event.begin < now && now < event.end ;
 
-  const past = events.filter(happeningInThePast).sort(antichronologically);
-  const future = events.filter(happeningInTheFuture);
-  const today = events.filter(happeningToday);
-  const current = events.filter(happeningNow);
+  const notIn = lists => {
+    const excludeSet = new Set(
+      Array.prototype.concat.apply(
+        [], lists.map(events => events.map(document => document.id))
+      )
+    );
+    return event => !excludeSet.has(event.id);
+  } ;
+
+  let remaining = events;
+  const current = remaining.filter(happeningNow);
+  remaining = remaining.filter(notIn([current]));
+  const today = remaining.filter(happeningToday);
+  remaining = remaining.filter(notIn([today]));
+  const past = remaining.filter(happeningInThePast).sort(antichronologically);
+  remaining = remaining.filter(notIn([past]));
+  const future = remaining.filter(happeningInTheFuture);
 
   refreshContentTimeline(past,future,today,current);
   refreshSidenavTimeline(past,future,today,current);
@@ -117,8 +130,8 @@ function refreshContentTimeline ( past,future,today,current ) {
   collections.push(collection("Now", current));
   collections.push(collection("Today", today));
 
-  if ( future.length > 0 ) {
-    if ( future.length > 1 ) {
+  if ( future.length + today.length + current.length > 0 ) {
+    if ( future.length + today.length + current.length > 1 ) {
       collections.push(collection("Upcoming", future.slice(0,3)));
     }
     collections.push(collection("Past", past.slice(0,3)));
@@ -141,8 +154,8 @@ function refreshSidenavTimeline ( past,future,today,current ) {
   collections.push(sidenavCollection("Now", current));
   collections.push(sidenavCollection("Today", today));
 
-  if ( future.length > 0 ) {
-    if ( future.length > 1 ) {
+  if ( future.length + today.length + current.length > 0 ) {
+    if ( future.length + today.length + current.length > 1 ) {
       collections.push(sidenavCollection("Upcoming", future.slice(0,3)));
     }
     collections.push(sidenavCollection("Past", past.slice(0,3)));
