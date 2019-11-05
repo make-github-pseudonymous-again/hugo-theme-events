@@ -1,4 +1,4 @@
-{{ if gt (len .Site.Params.nav.sections) 0 }}
+{{ if gt (len (.Site.Params.nav.sections | default .Site.Data.default.nav.sections)) 0 }}
 <h4>Events</h4>
 <div class="row">
   <div class="col s12">

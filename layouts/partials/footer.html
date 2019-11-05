@@ -1,8 +1,10 @@
 	<script>const SiteBaseURL = "{{.Site.BaseURL}}";</script>
 	{{ $mainjs := resources.Get "main.js" | minify | fingerprint }}
 	<script src="{{ $mainjs.Permalink }}"></script>
+	{{ if (.Site.Params.timeline | default .Site.Data.default.timeline) }}
 	{{ $timelinejs := resources.Get "timeline.js" | minify | fingerprint }}
 	<script src="{{ $timelinejs.Permalink }}"></script>
+	{{ end }}
 	{{ partial "search.html" . }}
 	{{ partial "materialize-js.html" . }}
 	{{ partial "math.html" . }}
