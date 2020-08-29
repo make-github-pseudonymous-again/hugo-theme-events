@@ -178,3 +178,18 @@ nav.searchbar {
   }
 
 }
+
+// code
+pre {
+  background-color: #333;
+  color: #eee;
+  padding: 1em;
+  overflow-x: scroll;
+  border-radius: 5px;
+}
+
+p > code {
+  border-radius: 3px;
+  background-color: #dcdcdc;
+  color: #ff4444;
+}
