@@ -8,5 +8,8 @@
 	{{ partial "search.html" . }}
 	{{ partial "materialize-js.html" . }}
 	{{ partial "math.html" . }}
+	{{- if templates.Exists "partials/trackers.html" -}}
+		{{ partial "trackers.html" . }}
+	{{- end }}
 </body>
 </html>
