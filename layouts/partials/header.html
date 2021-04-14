@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
+<meta charset="utf-8">
 
-	<meta charset="utf-8">
+<title>{{ .Title }}</title>
 
-	<title>{{ .Title }}</title>
+{{ range .AlternativeOutputFormats -}}
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}">
+{{ end -}}
 
-	{{ range .AlternativeOutputFormats -}}
-	<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
-	{{ end -}}
+{{ $style := resources.Get "sass/main.scss" | toCSS | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $style.Permalink }}">
+<!--{{ partial "materialize-css.html" . }}-->
 
-	{{ $style := resources.Get "sass/main.scss" | toCSS | minify | fingerprint }}
-	<link rel="stylesheet" href="{{ $style.Permalink }}">
-	<!--{{ partial "materialize-css.html" . }}-->
-
-	{{ partial "material-icons.html" . }}
-	{{ partial "viewport.html" . }}
-
-</head>
-<body>
+{{ partial "material-icons.html" . }}
+{{ partial "viewport.html" . }}

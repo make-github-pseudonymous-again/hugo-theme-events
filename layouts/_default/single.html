@@ -1,42 +1,39 @@
-{{ partial "header.html" . }}
-{{ partial "navbar.html" . }}
-{{ partial "breadcrumbs-post.html" . }}
-{{ partial "searchbar.html" . }}
+{{ define "breadcrumbs"}}
+  {{ partial "breadcrumbs-post.html" . }}
+{{ end }}
 
-  <div class="container">
-    <div class="row">
-      <div class="col m12">
-        <article>
-          <h1>{{ .Title | safeHTML }}</h1>
-          <h4>{{ partial "status-and-date.html" (dict "status" .Params.status "date" .Date) }}</h4>
-            {{ range $taxo, $terms := .Site.Taxonomies }}
-              {{ with $.Param $taxo }}
-                {{ if gt (len .) 0 }}
-                <h6>
-                <strong>{{ $taxo | title }}:</strong>
-                {{ partial "taxonomy-list.html" (dict "Site" $.Site "taxo" $taxo "terms" .) }}
-                </h6>
-                {{- end -}}
-              {{ end }}
+{{ define "contents" }}
+  <div class="row">
+    <div class="col m12">
+      <article>
+        <h1>{{ .Title | safeHTML }}</h1>
+        <h4>{{ partial "status-and-date.html" (dict "status" .Params.status "date" .Date) }}</h4>
+          {{ range $taxo, $terms := .Site.Taxonomies }}
+            {{ with $.Param $taxo }}
+              {{ if gt (len .) 0 }}
+              <h6>
+              <strong>{{ $taxo | title }}:</strong>
+              {{ partial "taxonomy-list.html" (dict "Site" $.Site "taxo" $taxo "terms" .) }}
+              </h6>
+              {{- end -}}
             {{ end }}
-          <p>{{ .Content }}</p>
-        </article>
-      </div>
+          {{ end }}
+        <p>{{ .Content }}</p>
+      </article>
     </div>
-    {{ with .Param "thumbnail" }}
-    <div class="row">
-      <div class="col s0 m2 l3"></div>
-      <div class="col s12 m8 l6">
-          <div class="card">
-            <div class="card-image">
-              <img src="{{ .src }}" alt="{{ .caption }}">
-              <span class="card-title">{{ .caption }}</span>
-            </div>
-          </div>
-      </div>
-      <div class="col s0 m2 l3"></div>
-    </div>
-    {{ end }}
   </div>
-
-{{ partial "footer.html" . }}
+  {{ with .Param "thumbnail" }}
+  <div class="row">
+    <div class="col s0 m2 l3"></div>
+    <div class="col s12 m8 l6">
+        <div class="card">
+          <div class="card-image">
+            <img src="{{ .src }}" alt="{{ .caption }}">
+            <span class="card-title">{{ .caption }}</span>
+          </div>
+        </div>
+    </div>
+    <div class="col s0 m2 l3"></div>
+  </div>
+  {{ end }}
+{{ end }}
