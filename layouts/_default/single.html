@@ -23,7 +23,11 @@
     </div>
   </div>
   {{- if templates.Exists "partials/comments.html" -}}
-      {{ partial "comments.html" . }}
+    <div class="row">
+      <div class="col m12">
+        {{ partial "comments.html" . }}
+      </div>
+    </div>
   {{- end }}
   {{ with .Param "thumbnail" }}
   <div class="row">
