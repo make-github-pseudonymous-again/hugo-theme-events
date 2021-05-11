@@ -28,7 +28,10 @@ const getKind = ( url ) => {
 	return 'item' ;
 }
 
-const matchToHTML = ( match ) => {
+const collection = (children) => `<ul class="collection">${children}</ul>`;
+const messageToHTML = (children) => `<li class="collection-item">${children}</li>`;
+
+const resultToHTML = ( match ) => {
 	const href = match.document.link;
 	const title = `${match.document.title} (${match.result.score.toFixed(3)})`;
 	const url = `${decodeURI(match.document.link)}`;
@@ -62,55 +65,54 @@ const search = document.getElementById('search');
 const results = document.getElementById('search-results');
 const searchButton = document.getElementById('search-button');
 
+const setMessage = (message) => {
+	const resultHTML = messageToHTML(message);
+	results.innerHTML = collection(resultHTML) ;
+};
+
+const setMatches = (matches) => {
+	const resultHTML = matches.map(resultToHTML).join('');
+	results.innerHTML = collection(resultHTML) ;
+	if (renderMathInElement) renderMathInElement(results);
+};
+
 let searchTimeout;
 let searchWorker;
 
 const query = ( queryString ) => {
 	if (!searchWorker) {
-		resultHTML = `<li class="collection-item">Connecting to worker...</li>`;
-		results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
+		setMessage('Connecting to worker...');
 		searchWorker = new Worker(`${SiteBaseURL}/searchWorker.js`);
-		searchWorker.onmessage = (e) => {
+		searchWorker.onmessage = ({data: {state, error, matches}}) => {
 			clearTimeout(searchTimeout);
-			searchTimeout = undefined;
-			const data = e.data;
-			const state = data.state;
-			const error = data.error;
-			const matches = data.matches;
 			if ( state === 'loading') {
-				resultHTML = `<li class="collection-item">Worker is generating an index</li>`;
+				setMessage('Worker is generating an index');
 			}
 			else if ( state === 'ready') {
-				resultHTML = `<li class="collection-item">Type to start searching</li>`;
+				setMessage('Type to start searching');
 			}
 			else if (error) {
-				resultHTML = `<li class="collection-item">lunr.js error: ${error.message}</li>`;
+				setMessage(`lunr.js error: ${error.message}`);
 			}
 			else if (matches.length === 0) {
-				resultHTML = `<li class="collection-item">Nothing matches the query</li>`;
+				setMessage('Nothing matches the query');
 			}
 			else {
-				resultHTML = matches.map(matchToHTML).join('');
+				setMatches(matches);
 			}
-
-			results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
-
-			if (renderMathInElement) renderMathInElement(results);
 
 		}
 	}
 	clearTimeout(searchTimeout);
 	searchTimeout = setTimeout(() => {
-		resultHTML = `<li class="collection-item">Search is taking longer than expected ...</li>`;
-		results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
+		setMessage('Search is taking longer than expected ...');
 	}, 1000);
 	return searchWorker.postMessage(queryString);
 }
 
 const initSearch = ( ) => {
 
-	resultHTML = `<li class="collection-item">Type something to initiate a search...</li>`;
-	results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
+	setMessage('Type something to initiate a search...');
 
 	const onInput = (event) => {
 		query(event.target.value);
@@ -143,6 +145,12 @@ const ensureSearchFeature = () => {
 }
 
 const initSearchButton = ( ) => {
+
+	setMessage(
+		`Success! You managed to reach the search bar without clicking the search button.
+		The search feature will not work unless you click the search button.
+		If you think this is a bug, please contact the maintainer of the hugo theme.`
+	);
 
 	// Configure search button to show and focus search input
 	const onClick = (event) => {
