@@ -1,4 +1,4 @@
-var ICONS = {
+const ICONS = {
 	'collection': 'class' ,
 	'item' : 'notes' ,
 	'author': 'face' ,
@@ -6,7 +6,7 @@ var ICONS = {
 	'tag' : 'label' ,
 } ;
 
-function statusAndDate ( date , status ) {
+const statusAndDate = ( date , status ) => {
 	if (status === "CANCELLED") return `<s>${date}</s><span class="red-text"> (CANCELLED)</span>` ;
 	else if (status === "TENTATIVE") return `${date}<span class="orange-text"> (TENTATIVE DATE AND TIME)</span>`;
 	else if (status === "CONFIRMED") return `${date}<span class="green-text"> (CONFIRMED)</span>`;
@@ -15,7 +15,7 @@ function statusAndDate ( date , status ) {
 
 const BEGIN_PATH = SiteBaseURL.split('/').slice(3).join('/').length + 1;
 
-function getKind ( url ) {
+const getKind = ( url ) => {
 
 	const parts = url.slice(BEGIN_PATH,-1).split('/');
 
@@ -28,7 +28,7 @@ function getKind ( url ) {
 	return 'item' ;
 }
 
-function matchToHTML ( match ) {
+const matchToHTML = ( match ) => {
 	const href = match.document.link;
 	const title = `${match.document.title} (${match.result.score.toFixed(3)})`;
 	const url = `${decodeURI(match.document.link)}`;
@@ -50,14 +50,12 @@ function matchToHTML ( match ) {
 	</li>`;
 }
 
-function measure ( what , callback ) {
-
-	var t0 = performance.now();
-	var output = callback();
-	var t1 = performance.now();
+const measure = ( what , callback ) => {
+	const t0 = performance.now();
+	const output = callback();
+	const t1 = performance.now();
 	console.debug( what + " took " + (t1 - t0) + " milliseconds.");
 	return output;
-
 }
 
 const search = document.getElementById('search');
@@ -67,12 +65,12 @@ const searchButton = document.getElementById('search-button');
 let searchTimeout;
 let searchWorker;
 
-function query ( queryString ) {
+const query = ( queryString ) => {
 	if (!searchWorker) {
 		resultHTML = `<li class="collection-item">Connecting to worker...</li>`;
 		results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
 		searchWorker = new Worker(`${SiteBaseURL}/searchWorker.js`);
-		searchWorker.onmessage = function(e) {
+		searchWorker.onmessage = (e) => {
 			clearTimeout(searchTimeout);
 			searchTimeout = undefined;
 			const data = e.data;
@@ -109,7 +107,7 @@ function query ( queryString ) {
 	return searchWorker.postMessage(queryString);
 }
 
-function initSearch ( ) {
+const initSearch = ( ) => {
 
 	resultHTML = `<li class="collection-item">Type something to initiate a search...</li>`;
 	results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
@@ -118,16 +116,16 @@ function initSearch ( ) {
 		query(event.target.value);
 	};
 
-	const onFocusIn = function () {
+	const onFocusIn = () => {
 		document.body.classList.add('searching');
 	} ;
 
-	const onFocusOut = function () {
+	const onFocusOut = () => {
 		document.body.classList.remove('searching');
 	} ;
 
-	const gobble = function (event) {
-	    event.stopPropagation();
+	const gobble = (event) => {
+		event.stopPropagation();
 	} ;
 
 	search.addEventListener('input', onInput);
@@ -138,16 +136,16 @@ function initSearch ( ) {
 }
 
 let searchInputInitialized = false;
-function ensureSearchFeature () {
+const ensureSearchFeature = () => {
 	if (searchInputInitialized) return;
 	searchInputInitialized = true;
-	measure("Initializing searching feature", function () {initSearch();});
+	measure("Initializing searching feature", initSearch);
 }
 
-function initSearchButton ( ) {
+const initSearchButton = ( ) => {
 
 	// Configure search button to show and focus search input
-	const onClick = function (event) {
+	const onClick = (event) => {
 		event.stopPropagation();
 		ensureSearchFeature();
 		document.body.classList.add('searched-at-least-once');
@@ -161,4 +159,4 @@ function initSearchButton ( ) {
 
 }
 
-measure("Initializing searching button", function () {initSearchButton();});
+measure("Initializing searching button", initSearchButton);
