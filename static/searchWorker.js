@@ -28,7 +28,6 @@ function measure ( logger , what , callback ) {
 
 
 function executeQuery ( index , queryString ) {
-	let resultHTML;
 	try {
 
 		//const results = self.index.search(queryString);
