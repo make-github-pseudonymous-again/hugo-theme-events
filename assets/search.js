@@ -1,31 +1,31 @@
 var ICONS = {
-    'collection': 'class' ,
-    'item' : 'notes' ,
-    'author': 'face' ,
-    'speaker': 'face' ,
-    'tag' : 'label' ,
+	'collection': 'class' ,
+	'item' : 'notes' ,
+	'author': 'face' ,
+	'speaker': 'face' ,
+	'tag' : 'label' ,
 } ;
 
 function statusAndDate ( date , status ) {
-    if (status === "CANCELLED") return `<s>${date}</s><span class="red-text"> (CANCELLED)</span>` ;
-    else if (status === "TENTATIVE") return `${date}<span class="orange-text"> (TENTATIVE DATE AND TIME)</span>`;
-    else if (status === "CONFIRMED") return `${date}<span class="green-text"> (CONFIRMED)</span>`;
-    return date;
+	if (status === "CANCELLED") return `<s>${date}</s><span class="red-text"> (CANCELLED)</span>` ;
+	else if (status === "TENTATIVE") return `${date}<span class="orange-text"> (TENTATIVE DATE AND TIME)</span>`;
+	else if (status === "CONFIRMED") return `${date}<span class="green-text"> (CONFIRMED)</span>`;
+	return date;
 }
 
 const BEGIN_PATH = SiteBaseURL.split('/').slice(3).join('/').length + 1;
 
 function getKind ( url ) {
 
-    const parts = url.slice(BEGIN_PATH,-1).split('/');
+	const parts = url.slice(BEGIN_PATH,-1).split('/');
 
-    if (parts.length === 1) return 'collection' ;
+	if (parts.length === 1) return 'collection' ;
 
-    if (parts[0] === 'authors') return 'author' ;
-    if (parts[0] === 'speakers') return 'speaker' ;
-    if (parts[0] === 'tags') return 'tag' ;
+	if (parts[0] === 'authors') return 'author' ;
+	if (parts[0] === 'speakers') return 'speaker' ;
+	if (parts[0] === 'tags') return 'tag' ;
 
-    return 'item' ;
+	return 'item' ;
 }
 
 function matchToHTML ( match ) {
@@ -42,11 +42,11 @@ function matchToHTML ( match ) {
 		avatar = `<img src="${thumbnail.src}" alt="${thumbnail.caption || ''}" class="circle">` ;
 	}
 	return `<li class="collection-item avatar" onClick="window.location.href='${href}'">
-	  ${avatar}
-	  <span class="title">${title}</span>
-	  <p>${subtitle}<br>${url}</p>
-	  <div class="hide-on-small-only">${text}</div>
-	  <span class="secondary-content"><i class="material-icons">${icon}</i></span>
+		${avatar}
+		<span class="title">${title}</span>
+		<p>${subtitle}<br>${url}</p>
+		<div class="hide-on-small-only">${text}</div>
+		<span class="secondary-content"><i class="material-icons">${icon}</i></span>
 	</li>`;
 }
 
