@@ -82,7 +82,7 @@ let searchWorker;
 const query = ( queryString ) => {
 	if (!searchWorker) {
 		setMessage('Connecting to worker...');
-		searchWorker = new Worker(`${SiteBaseURL}/searchWorker.js`);
+		searchWorker = new Worker(`${SiteBaseURL}searchWorker.js`);
 		searchWorker.onmessage = ({data: {state, error, matches}}) => {
 			clearTimeout(searchTimeout);
 			if ( state === 'loading') {
