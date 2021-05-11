@@ -64,21 +64,58 @@ const search = document.getElementById('search');
 const results = document.getElementById('search-results');
 const searchButton = document.getElementById('search-button');
 
+let searchTimeout;
+let searchWorker;
+
+function query ( queryString ) {
+	if (!searchWorker) {
+		resultHTML = `<li class="collection-item">Connecting to worker...</li>`;
+		results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
+		searchWorker = new Worker(`${SiteBaseURL}/searchWorker.js`);
+		searchWorker.onmessage = function(e) {
+			clearTimeout(searchTimeout);
+			searchTimeout = undefined;
+			const data = e.data;
+			const state = data.state;
+			const error = data.error;
+			const matches = data.matches;
+			if ( state === 'loading') {
+				resultHTML = `<li class="collection-item">Worker is generating an index</li>`;
+			}
+			else if ( state === 'ready') {
+				resultHTML = `<li class="collection-item">Type to start searching</li>`;
+			}
+			else if (error) {
+				resultHTML = `<li class="collection-item">lunr.js error: ${error.message}</li>`;
+			}
+			else if (matches.length === 0) {
+				resultHTML = `<li class="collection-item">Nothing matches the query</li>`;
+			}
+			else {
+				resultHTML = matches.map(matchToHTML).join('');
+			}
+
+			results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
+
+			if (renderMathInElement) renderMathInElement(results);
+
+		}
+	}
+	clearTimeout(searchTimeout);
+	searchTimeout = setTimeout(() => {
+		resultHTML = `<li class="collection-item">Search is taking longer than expected ...</li>`;
+		results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
+	}, 1000);
+	return searchWorker.postMessage(queryString);
+}
+
 function initSearch ( ) {
 
-	let searchTimeout;
+	resultHTML = `<li class="collection-item">Type something to initiate a search...</li>`;
+	results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
 
-	const searchWorker = new Worker(`${SiteBaseURL}/searchWorker.js`);
-
-	const onInput = function (event) {
-		clearTimeout(searchTimeout);
-		searchTimeout = undefined;
-		const queryString = event.target.value;
-		searchWorker.postMessage(queryString);
-		searchTimeout = setTimeout(function () {
-		    resultHTML = `<li class="collection-item">Search is taking longer than expected ...</li>`;
-		    results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
-		}, 1000);
+	const onInput = (event) => {
+		query(event.target.value);
 	};
 
 	const onFocusIn = function () {
@@ -98,42 +135,13 @@ function initSearch ( ) {
 	search.addEventListener('click', gobble);
 	document.body.addEventListener('click', onFocusOut);
 
-	searchWorker.onmessage = function(e) {
-		clearTimeout(searchTimeout);
-		searchTimeout = undefined;
-		var data = e.data;
-		var state = data.state;
-		var error = data.error;
-		var matches = data.matches;
-		if ( state === 'loading') {
-			resultHTML = `<li class="collection-item">Worker is generating an index</li>`;
-		}
-		else if ( state === 'ready') {
-			resultHTML = `<li class="collection-item">Type to start searching</li>`;
-		}
-		else if (error) {
-			resultHTML = `<li class="collection-item">lunr.js error: ${error.message}</li>`;
-		}
-		else if (matches.length === 0) {
-			resultHTML = `<li class="collection-item">Nothing matches the query</li>`;
-		}
-		else {
-			resultHTML = matches.map(matchToHTML).join('');
-		}
-
-		results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
-
-		if (renderMathInElement) renderMathInElement(results);
-
-	}
-
 }
 
-let initialized = false;
+let searchInputInitialized = false;
 function ensureSearchFeature () {
-    if (initialized) return;
-    initialized = true;
-    measure("Initializing searching feature", function () {initSearch();});
+	if (searchInputInitialized) return;
+	searchInputInitialized = true;
+	measure("Initializing searching feature", function () {initSearch();});
 }
 
 function initSearchButton ( ) {
@@ -141,15 +149,12 @@ function initSearchButton ( ) {
 	// Configure search button to show and focus search input
 	const onClick = function (event) {
 		event.stopPropagation();
+		ensureSearchFeature();
 		document.body.classList.add('searched-at-least-once');
 		window.scrollTo(0, 0);
 		search.focus();
-		ensureSearchFeature();
 	} ;
 	searchButton.addEventListener('click', onClick);
-
-	resultHTML = `<li class="collection-item">Connecting to worker...</li>`;
-	results.innerHTML = '<ul class="collection">' + resultHTML + '</ul>' ;
 
 	// Notify page that search is ready
 	document.body.classList.add('searching-initialized');
