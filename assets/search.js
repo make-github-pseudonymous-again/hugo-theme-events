@@ -6,8 +6,6 @@ var ICONS = {
     'tag' : 'label' ,
 } ;
 
-var searchTimeout = undefined;
-
 function statusAndDate ( date , status ) {
     if (status === "CANCELLED") return `<s>${date}</s><span class="red-text"> (CANCELLED)</span>` ;
     else if (status === "TENTATIVE") return `${date}<span class="orange-text"> (TENTATIVE DATE AND TIME)</span>`;
@@ -62,12 +60,16 @@ function measure ( what , callback ) {
 
 }
 
+const search = document.getElementById('search');
+const results = document.getElementById('search-results');
+const searchButton = document.getElementById('search-button');
+
 function initSearch ( ) {
+
+	let searchTimeout;
 
 	const searchWorker = new Worker(`${SiteBaseURL}/searchWorker.js`);
 
-	const search = document.getElementById('search');
-	const results = document.getElementById('search-results');
 	const onInput = function (event) {
 		clearTimeout(searchTimeout);
 		searchTimeout = undefined;
@@ -125,13 +127,24 @@ function initSearch ( ) {
 
 	}
 
+}
+
+let initialized = false;
+function ensureSearchFeature () {
+    if (initialized) return;
+    initialized = true;
+    measure("Initializing searching feature", function () {initSearch();});
+}
+
+function initSearchButton ( ) {
+
 	// Configure search button to show and focus search input
-	const searchButton = document.getElementById('search-button');
 	const onClick = function (event) {
 		event.stopPropagation();
 		document.body.classList.add('searched-at-least-once');
 		window.scrollTo(0, 0);
 		search.focus();
+		ensureSearchFeature();
 	} ;
 	searchButton.addEventListener('click', onClick);
 
@@ -143,4 +156,4 @@ function initSearch ( ) {
 
 }
 
-measure("Initializing searching feature", function () {initSearch();});
+measure("Initializing searching button", function () {initSearchButton();});
